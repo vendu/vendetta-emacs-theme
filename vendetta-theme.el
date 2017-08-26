@@ -39,7 +39,7 @@
  '(font-lock-keyword-face
    ((t (:foreground "deep sky blue"))))
  '(font-lock-preprocessor-face
-   ((t (:foreground "magenta"))))
+   ((t (:foreground "salmon"))))
 ;; '(font-lock-preprocessor-face
 ;;   ((t (:foreground "gold"))))
  '(font-lock-string-face
