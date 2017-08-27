@@ -1,0 +1,9 @@
+*~
+*.BAK
+# VIM swap files
+*.swp
+# ctags files
+_minted-*
+# byte-compiled emacs lisp files
+*.elc
+

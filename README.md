@@ -1,39 +1,48 @@
-To use this theme, make sure you have [local.el](https://github.com/vendu/vendetta-emacs-theme/blob/master/local.el) somewhere in your load path such
-as under the ~/.emacs.d/lisp/ directory.
+# Getting Started
 
-Here is my ~/.emacs configuration file
+To use this theme, make sure you have
 
-----8<----
+   [local.el](https://github.com/vendu/vendetta-emacs-theme/blob/master/local.el)
 
-;; -*-no-byte-compile: t; -*-
+somewhere in your load path such as under the *~/.emacs.d/lisp/* directory.
 
-;;(defconst local-debug-on nil)
-(defconst custom-file "~/.emacs-custom")
-(defconst local-load-path "~/.emacs.d/lisp/")
-(defconst local-lisp-file "local")
+## Example Emacs Configuration File
 
-(custom-set-variables
- '(package-enable-startup nil)
- '(load-prefer-newer t)
- '(mouse-wheel-progressive-speed nil)
- '(global-font-lock-mode t)
- '(transient-mark-mode t)
- '(show-paren-mode t)
- '(help-enable-auto-load nil)
- '(load-dangerous-libraries nil))
+On my system, this file is ~/.emacs - Your Mileage May Vary (TM)... =)
 
-(defun personal-init()
-  (add-to-list 'load-path local-load-path)
-  ;;  (load-file local-init-file-path)
-  (load local-lisp-file))
+---
 
-(personal-init)
+    ;; -*-no-byte-compile: t; -*-
 
-----8<----
+    ;;(defconst local-debug-on nil)
+    (defconst custom-file "~/.emacs-custom")
+    (defconst local-load-path "~/.emacs.d/lisp/")
+    (defconst local-lisp-file "local")
 
-Screenshots
------------
+    (custom-set-variables
+     '(package-enable-startup nil)
+     '(load-prefer-newer t)
+     '(mouse-wheel-progressive-speed nil)
+     '(global-font-lock-mode t)
+     '(transient-mark-mode t)
+     '(show-paren-mode t)
+     '(help-enable-auto-load nil)
+     '(load-dangerous-libraries nil))
+
+    (defun personal-init()
+      (add-to-list 'load-path local-load-path)
+      ;;  (load-file local-init-file-path)
+      (load local-lisp-file))
+
+    (personal-init)
+
+---
+
+# Screenshots
+
+## c-mode
 
 ![c-mode screenshot #1](https://github.com/vendu/vendetta-emacs-theme/blob/master/img/vendetta-c-mode-001.png)
+
 ![c-mode screenshot #2](https://github.com/vendu/vendetta-emacs-theme/blob/master/img/vendetta-c-mode-002.png)
 

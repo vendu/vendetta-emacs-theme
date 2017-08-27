@@ -34,10 +34,10 @@
 
 ;;(defun vendetta-verilog-mode-hook())
 
-(add-to-list 'auto-mode-alist "\\.v\\'" verilog-mode)
-(add-to-list 'auto-mode-alist "\\.vh\\'" . verilog-mode)
-(add-to-list 'auto-mode-alist "testfixture.verilog" verilog-mode)
-(add-to-list 'auto-mode-alist "testfixture.template" verilog-mode)
+(add-to-list 'auto-mode-alist "\\.v\\'" 'verilog-mode)
+(add-to-list 'auto-mode-alist "\\.vh\\'" 'verilog-mode)
+(add-to-list 'auto-mode-alist "testfixture.verilog" 'verilog-mode)
+(add-to-list 'auto-mode-alist "testfixture.template" 'verilog-mode)
 
 (defun vendetta-verilog-mode-hook()
   (vendetta-init-verilog-style))
