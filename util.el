@@ -1,5 +1,6 @@
 ;; -*-no-byte-compile: t; -*-
 
+;;;###autoload
 (defun reverse-list-with-dolist (list)
   "Using dolist, reverse the order of LIST."
   (let (value)  ; make sure list starts empty
@@ -8,6 +9,7 @@
 
 ;; this one was shared by abo-abo on stackexchange.com :)
 
+;;;###autoload
 (defun update-all-autoloads ()
   (interactive)
   (let* (generated-autoload-file (concat vendetta-autoload-file)
@@ -29,6 +31,7 @@
 ;; URL `http://ergoemacs.org/emacs/elisp_compact_empty_lines.html'
 ;; Version 2017-01-27"
 
+;;;###autoload
 (defun xah-clean-empty-lines (&optional @begin @end @n)
   (interactive
    (if (region-active-p)
@@ -49,6 +52,7 @@
 ;; Works on whole buffer or text selection, respects `narrow-to-region'.
 ;; Version 2016-10-15"
 
+;;;###autoload
 (defun xah-clean-whitespace (&optional @begin @end)
   (interactive
    (if (region-active-p)
@@ -69,6 +73,7 @@
         (while (equal (char-before) 32) ; char 32 is space
           (delete-char -1))))))
 
+;;;###autoload
 (defun xah-init-whitespace()
   (progn
     ;;  Make whitespace-mode with very basic background coloring for whitespaces.

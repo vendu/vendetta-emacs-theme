@@ -2,6 +2,10 @@
 
 ;; emacs lisp functionality
 
+(custom-theme-set-variables
+ 'vendetta
+ '(indent-tabs-mode nil))
+
 ;(defun vendetta-emacs-lisp-after-save-hook()
 ;  (let* file-extension (file-name-extension buffer-file-name))
 ;  ((if (or (string-equal (downcase file-extension) "elc")
@@ -15,7 +19,7 @@
 ;   nil))
 
 (defun vendetta-emacs-lisp-mode-hook()
-  (setq indent-tabs-mode nil)
   ;;	    (define-key flyspell-mode-map "\M-\t" nil)
   (define-key emacs-lisp-mode-map "\C-x\C-e" 'pp-eval-last-sexp)
   (define-key emacs-lisp-mode-map [ret] 'reindent-then-newline-and-indent))
+

@@ -2,13 +2,14 @@
 
 ;; customizations for [c] programming
 
-(defconst vendetta-c-style "zero")
+(custom-theme-set-variables
+ 'vendetta
+ '(vendetta-c-style "zero"))
 
 (defconst vendetta-zero-c-style
   '((c-basic-offset . 4)
     (c-label-minimum-indentation . +)
     (c-tab-always-indent . nil)
-    (indent-tabs-mode . nil)
     (c-syntactic-indentation . t)
     (c-syntactic-indentation-in-macros . t)
     (c-echo-syntactic-information-p . t)
@@ -131,6 +132,7 @@
 ;;    (c-require-final-newline t)))
 
 ;; this routine was modified from one donated by stack_pivot on reddit :)
+;;;###autoload
 (defun vendetta-indent-c-after-label(symbol-and-anchor)
   (let* ((new-offset '++)
          (anchor (cdr symbol-and-anchor))
@@ -143,12 +145,14 @@
           (setq new-offset (- (point) anchor 1)))
       new-offset)))
 
+;;;###autoload
 (defun vendetta-set-c-mode-defaults()
   (add-hook 'c-special-indent-hook 'delete-trailing-whitespace)
   (set-buffer-file-coding-system 'iso-latin-1-unix t)
   (define-key c-mode-base-map "\C-TAB" 'newline-and-indent)
   (define-key c-mode-base-map [ret]  'newline-and-indent))
 
+;;;###autoload
 (defun vendetta-init-c-font-lock-style()
   (font-lock-add-keywords 'c-mode
 			  '(("FIXME" 1 font-lock-warning-face prepend)
@@ -157,14 +161,17 @@
                             ("REFERENCE" 1 font-lock-constant-face prepend)
                             ("NOTREACHED" 1 font-lock-warning-face prepend))))
 
+;;;###autoload
 (defun vendetta-init-c-style()
   (c-set-style vendetta-c-style)
   (vendetta-set-c-mode-defaults)
   (vendetta-init-c-font-lock-style))
 
+;;;###autoload
 (defun vendetta-c-mode()
+  (setq indent-tabs-mode nil)
   (vendetta-init-c-style))
 
-(add-to-list 'auto-mode-alist "\\.[ch]\\" 'vendetta-c-mode)
-(add-to-list 'auto-mode-alist "\\.ino$\\" 'vendetta-c-mode)
+;;(add-to-list 'auto-mode-alist "\\.[ch]\\" 'vendetta-c-mode)
+(add-to-list 'auto-mode-alist "\\.ino$\\" 'c-mode)
 
