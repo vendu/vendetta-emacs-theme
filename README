@@ -1,4 +1,7 @@
-Here is ~/.emacs
+To use this theme, make sure you have local.el somewhere in your load path such
+as in ~/.emacs.d/lisp/
+
+Here is my ~/.emacs
 
 ----8<----
 
