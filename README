@@ -1,9 +1,7 @@
-Screenshot of the C-mode: http://vendu.twodots.nl/files/vendetta-c-mode2.png
+To use this theme, make sure you have [local.el](https://github.com/vendu/vendetta-emacs-theme/blob/master/local.el) somewhere in your load path such
+as under the ~/.emacs.d/lisp/ directory.
 
-To use this theme, make sure you have local.el somewhere in your load path such
-as in ~/.emacs.d/lisp/
-
-Here is my ~/.emacs
+Here is my ~/.emacs configuration file
 
 ----8<----
 
@@ -30,4 +28,12 @@ Here is my ~/.emacs
   (load local-lisp-file))
 
 (personal-init)
+
+----8<----
+
+Screenshots
+-----------
+
+![c-mode screenshot #1](https://github.com/vendu/vendetta-emacs-theme/blob/master/img/vendetta-c-mode-001.png)
+![c-mode screenshot #2](https://github.com/vendu/vendetta-emacs-theme/blob/master/img/vendetta-c-mode-002.png)
 
