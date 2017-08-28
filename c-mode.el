@@ -16,7 +16,7 @@
     (c-auto-align-backslashes . t)
     (c-electric-pound-behavior . (alignleft))
     (c-basic-offset . 4)
-    (c-comment-only-line-offset . (+ . 0))
+    (c-comment-only-line-offset . 0)
     (c-label-minimum-indentation . +)
     (c-hanging-semi&comma-criteria .
                                    (c-semi&comma-no-newlines-before-nonblanks
@@ -26,22 +26,24 @@
                       (c . (c-lineup-C-comments 0))
                       (comment-intro . (c-lineup-knr-region-comment
                                         c-comment-only-line-offset
-                                        0))
-                      (cpp-macro . (vendetta-indent-cpp-macro 0))
+                                        [0]))
+                      (cpp-macro . [0])
                       (cpp-macro-cont . 0)
                       (cpp-define-intro . (c-lineup-cpp-define +))
                       (defun-block-intro . +)
                       (defun-close . (c-lineup-close-paren))
                       (block-open . 0)
                       (block-close . 0)
-                      (topmost-intro . 0)
+                      (topmost-intro . [0])
                       (topmost-intro-cont . 0)
                       (statement . 0)
-                      (statement-case-open . +)
-                      (statement-case-intro . +)
-                      (statement-block-intro . (c-lineup-comment
-                                                vendetta-indent-c-after-label
-                                                +))
+                      (statement-case-open . 0)
+                      (statement-case-intro .
+                                            (vendetta-indent-c-label-intro
+                                             +))
+                      (statement-block-intro .
+                                             (vendetta-indent-c-label-intro
+                                              +))
                       (statement-cont . (c-lineup-assignments
                                          c-lineup-string-cont
                                          c-lineup-cascaded-calls
@@ -99,8 +101,8 @@
                              (block-close . c-snug-do-while)
                              (extern-lang-open after)))
     (c-hanging-colons-alist .
-                            ((label)
-                             (case-label)))
+                            (label
+                             case-label))
     (c-cleanup-list .
                     (brace-else-brace
                      brace-elseif-brace
@@ -112,23 +114,29 @@
                      one-liner-defun)))
   "ZERO C Style")
 
-(defun vendetta-indent-cpp-macro(symbol-and-anchor)
-  (let* ((anchor (cdr symbol-and-anchor))
-         (cur-col (c-langelem-col anchor t))
-         (new-ofs (- cur-col)))
-    new-ofs))
-
-(defun vendetta-indent-c-after-label(symbol-and-anchor)
-  (let* ((new-offset '++)
+;; this routine was edited from one donated by stack_pivot on reddit :)
+(defun vendetta-indent-c-label-intro(symbol-and-anchor)
+  (let* ((new-offset nil)
          (anchor (cdr symbol-and-anchor))
          (anchor-line (line-number-at-pos anchor)))
-    (save-excursion
-      (goto-char anchor)
-      (search-forward-regexp ":[[:space:]]*[^[:space:]{]" nil t)
-      (if (and (> (point) anchor)
-               (= anchor-line (line-number-at-pos)))
-          (setq new-offset (- (point) anchor 1)))
-      new-offset)))
+        (save-excursion
+          (goto-char anchor)
+          (setq word (current-word))
+          (message "word: %s" 'word)
+          (if (or (eq word 'case-label)
+                  (eq word 'label))
+              (setq new-offset '++)))
+        new-offset))
+;;          (cond ((search-forward-regexp ":[[:space:]]*[^[:space:][;{]]" nil t)
+;;                 ;; did we find non-whitespace (and not just an open brace or
+;;                 ;; semicolon) after the colon on the case line?
+;;                 (if (and (> (point) anchor)
+;;                          (= anchor-line (line-number-at-pos)))
+;;                     (setq new-offset (- (point) anchor 1))))
+;;                ((search-forward-regexp ":[[:space:]]*" nil t)
+;;                 ;; colon followed by whitespace
+;;                 (setq new-offset '++)))))
+;;    new-offset))
 
 (defun vendetta-set-c-mode-defaults()
 ;;  (add-hook 'c-special-indent-hook 'delete-trailing-whitespace)
@@ -157,6 +165,6 @@
 (defun vendetta-c-mode()
   (vendetta-init-c-style))
 
-(add-to-list 'auto-mode-alist "\\.[ch]\\" 'vendetta-c-mode)
-(add-to-list 'auto-mode-alist "\\.ino$\\" 'vendetta-c-mode)
+;;(add-to-list 'auto-mode-alist "\\.[ch]\\" 'c-mode)
+(add-to-list 'auto-mode-alist "\\.ino$\\" 'c-mode)
 
