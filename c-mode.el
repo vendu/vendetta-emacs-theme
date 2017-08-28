@@ -2,14 +2,10 @@
 
 ;; customizations for [c] programming
 
-(custom-theme-set-variables
- 'vendetta
- '(vendetta-c-style "zero"))
-
 (defconst vendetta-zero-c-style
-  '((c-basic-offset . 4)
-    (c-label-minimum-indentation . +)
-    (c-tab-always-indent . nil)
+  '((c-electric-flag t)
+    (c-progress interval 1)
+    (c-tab-always-indent . t)
     (c-syntactic-indentation . t)
     (c-syntactic-indentation-in-macros . t)
     (c-echo-syntactic-information-p . t)
@@ -18,6 +14,10 @@
     (c-backslash-column . fill-column)
     (c-max-oneliner-length . fill-column)
     (c-auto-align-backslashes . t)
+    (c-electric-pound-behavior . (alignleft))
+    (c-basic-offset . 4)
+    (c-comment-only-line-offset . (+ . 0))
+    (c-label-minimum-indentation . +)
     (c-hanging-semi&comma-criteria .
                                    (c-semi&comma-no-newlines-before-nonblanks
                                     c-semi&comma-inside-parenlist))
@@ -27,23 +27,21 @@
                       (comment-intro . (c-lineup-knr-region-comment
                                         c-comment-only-line-offset
                                         0))
-                      (cpp-macro . 0)
-                      (cpp-macro-cont . +)
+                      (cpp-macro . (vendetta-indent-cpp-macro 0))
+                      (cpp-macro-cont . 0)
                       (cpp-define-intro . (c-lineup-cpp-define +))
-                      (defun-block-intro . (c-lineup-arglist-intro-after-paren))
+                      (defun-block-intro . +)
                       (defun-close . (c-lineup-close-paren))
                       (block-open . 0)
                       (block-close . 0)
-                      (topmost-intro . +)
-                      (topmost-intro-cont . (c-lineup-assignments
-                                             c-lineup-string-cont
-                                             c-lineup-cascaded-calls
-                                             c-lineup-math
-                                             +))
+                      (topmost-intro . 0)
+                      (topmost-intro-cont . 0)
                       (statement . 0)
                       (statement-case-open . +)
                       (statement-case-intro . +)
-                      (statement-block-intro . (vendetta-indent-c-after-label +))
+                      (statement-block-intro . (c-lineup-comment
+                                                vendetta-indent-c-after-label
+                                                +))
                       (statement-cont . (c-lineup-assignments
                                          c-lineup-string-cont
                                          c-lineup-cascaded-calls
@@ -82,7 +80,11 @@
                                               c-lineup-math
                                               0))
                       (arglist-close . (c-lineup-arglist-close-under-paren 0))
-                      (func-decl-cont . 0)
+                      (func-decl-cont . (c-lineup-assignments
+                                             c-lineup-string-cont
+                                             c-lineup-cascaded-calls
+                                             c-lineup-math
+                                             0))
                       (knr-argdecl-intro . -)
                       (knr-argdecl . 0)
                       (extern-lang-open . 0)
@@ -109,30 +111,13 @@
                      scope-operator
                      one-liner-defun)))
   "ZERO C Style")
-(c-add-style "zero" vendetta-zero-c-style)
 
-;;(defconst zero-user-c-style-vars
-;;  '((c-basic-offset 4)
-;;    (tab-width 8)
-;;    (c-statement-offset '(c-lineup-runin-statements 0))
-;;    (c-brace-list-entry-offset '(c-lineup-whitesmith-blocks))
-;;    (c-brace-entry-open-offset '(c-lineup-whitesmith-blocks))
-;;    (c-statement-offset '(c-lineup-whitesmith-blocks))
-;;    (c-arglist-cont-offset '(c-lineup-whitesmith-blocks))
-;;    (c-defun-block-intro-offset '(c-lineup-whitesmith-in-block +))
-;;    (c-defun-close-offset '(c-lineup-whitesmith-in-block 0))
-;;    (c-block-close-offset '(c-lineup-whitesmith-in-block 0))
-;;    (c-brace-list-intro-offset '(c-lineup-whitesmith-in-block +))
-;;    (c-brace-list-close-offset '(c-lineup-whitesmith-in-block 0))
-;;    (c-statement-block-intro-offset '(c-lineup-whitesmith-in-block
-;;                                      vendetta-indent-c-after-label +))
-;;    (c-arglist-intro-offset '(c-lineup-whitesmith-in-block +))
-;;    (c-arglist-cont-nonempty-offset '(c-lineup-whitesmith-in-block +))
-;;    (c-arglist-close-offset '(c-lineup-whitesmith-in-block 0))
-;;    (c-require-final-newline t)))
+(defun vendetta-indent-cpp-macro(symbol-and-anchor)
+  (let* ((anchor (cdr symbol-and-anchor))
+         (cur-col (c-langelem-col anchor t))
+         (new-ofs (- cur-col)))
+    new-ofs))
 
-;; this routine was modified from one donated by stack_pivot on reddit :)
-;;;###autoload
 (defun vendetta-indent-c-after-label(symbol-and-anchor)
   (let* ((new-offset '++)
          (anchor (cdr symbol-and-anchor))
@@ -145,14 +130,12 @@
           (setq new-offset (- (point) anchor 1)))
       new-offset)))
 
-;;;###autoload
 (defun vendetta-set-c-mode-defaults()
-  (add-hook 'c-special-indent-hook 'delete-trailing-whitespace)
+;;  (add-hook 'c-special-indent-hook 'delete-trailing-whitespace)
   (set-buffer-file-coding-system 'iso-latin-1-unix t)
   (define-key c-mode-base-map "\C-TAB" 'newline-and-indent)
-  (define-key c-mode-base-map [ret]  'newline-and-indent))
+  (define-key c-mode-base-map [ret] 'newline-and-indent))
 
-;;;###autoload
 (defun vendetta-init-c-font-lock-style()
   (font-lock-add-keywords 'c-mode
 			  '(("FIXME" 1 font-lock-warning-face prepend)
@@ -161,17 +144,19 @@
                             ("REFERENCE" 1 font-lock-constant-face prepend)
                             ("NOTREACHED" 1 font-lock-warning-face prepend))))
 
-;;;###autoload
 (defun vendetta-init-c-style()
-  (c-set-style vendetta-c-style)
+  (setq indent-tabs-mode nil)
+  (setq tab-always-indent t)
+  (c-toggle-electric-state t)
+;;  (c-toggle-auto-hungry-state t)
+  (c-add-style "zero" vendetta-zero-c-style)
+  (c-set-style "zero")
   (vendetta-set-c-mode-defaults)
   (vendetta-init-c-font-lock-style))
 
-;;;###autoload
 (defun vendetta-c-mode()
-  (setq indent-tabs-mode nil)
   (vendetta-init-c-style))
 
-;;(add-to-list 'auto-mode-alist "\\.[ch]\\" 'vendetta-c-mode)
-(add-to-list 'auto-mode-alist "\\.ino$\\" 'c-mode)
+(add-to-list 'auto-mode-alist "\\.[ch]\\" 'vendetta-c-mode)
+(add-to-list 'auto-mode-alist "\\.ino$\\" 'vendetta-c-mode)
 

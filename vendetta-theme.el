@@ -59,16 +59,13 @@
   (add-hook 'before-save-hook 'xah-clean-whitespace)
   (add-hook 'emacs-lisp-mode-hook 'vendetta-emacs-lisp-mode-hook)
   (add-hook 'emacs-lisp-mode-hook 'eldoc-mode)
+  (add-hook 'c-mode-hook 'vendetta-c-mode)
   (add-hook 'asm-mode-hook 'vendetta-asm-mode-hook)
   (add-hook 'tex-mode-hook 'vendetta-tex-mode-hook)
   (add-hook 'tex-mode-hook 'visual-line-mode)
   (add-hook 'verilog-mode-hook 'vendetta-verilog-mode-hook))
-  (add-hook 'c-mode-hook 'vendetta-c-mode)
 
 (defun vendetta-theme-init()
-;;  (load vendetta-init-file)
-;;  (load vendetta-custom-file)
-;; make return key also do indent, globally
   (load vendetta-util-file)
   (load vendetta-emacs-lisp-mode-file)
   (load vendetta-c-mode-file)
