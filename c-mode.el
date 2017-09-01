@@ -11,8 +11,9 @@
     (c-echo-syntactic-information-p . t)
     (c-indent-comments-syntactically-p . t)
     (c-strict-syntax-p . nil)
-    (c-backslash-column . fill-column)
-    (c-max-oneliner-length . fill-column)
+;;    (c-backslash-column fill-column)
+    ;;    (c-max-oneliner-length fill-column)
+    (c-backslash-column . 72)
     (c-auto-align-backslashes . t)
     (c-electric-pound-behavior . (alignleft))
     (c-basic-offset . 4)
@@ -24,19 +25,29 @@
     (c-offsets-alist .
                      ((string . 0)
                       (c . (c-lineup-C-comments 0))
+;;                      (comment-intro . (c-lineup-knr-region-comment
+;;                                        c-comment-only-line-offset
+;;                                        [0]))
                       (comment-intro . (c-lineup-knr-region-comment
                                         c-comment-only-line-offset
                                         [0]))
                       (cpp-macro . [0])
                       (cpp-macro-cont . 0)
+;;                      (cpp-macro-cont . (c-lineup-assignments
+;;                                         c-lineup-string-cont
+;;                                         c-lineup-cascaded-calls
+;;                                         c-lineup-math
+;;                                         [0]))
                       (cpp-define-intro . (c-lineup-cpp-define +))
                       (defun-block-intro . +)
                       (defun-close . (c-lineup-close-paren))
                       (block-open . 0)
                       (block-close . 0)
-                      (topmost-intro . [0])
+                      (topmost-intro . 0)
                       (topmost-intro-cont . 0)
-                      (statement . 0)
+                      (statement .
+                                 (vendetta-indent-c-label-intro
+                                  0))
                       (statement-case-open . 0)
                       (statement-case-intro .
                                             (vendetta-indent-c-label-intro
@@ -87,6 +98,7 @@
                                              c-lineup-cascaded-calls
                                              c-lineup-math
                                              0))
+                      (inclass . +)
                       (knr-argdecl-intro . -)
                       (knr-argdecl . 0)
                       (extern-lang-open . 0)
@@ -101,8 +113,9 @@
                              (block-close . c-snug-do-while)
                              (extern-lang-open after)))
     (c-hanging-colons-alist .
-                            (label
-                             case-label))
+                            ((label after)
+                             (case-label after)
+                             (member-init-intro before)))
     (c-cleanup-list .
                     (brace-else-brace
                      brace-elseif-brace
