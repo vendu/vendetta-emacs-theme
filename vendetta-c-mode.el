@@ -69,9 +69,10 @@
                       (member-init-cont . +)
                       (brace-list-open . 0)
                       (brace-list-intro . +)
-                      (brace-list-entry . +)
-                      (brace-list-close .
-                                        (c-lineup-arglist-close-under-paren 0))
+                      (brace-list-entry . 0)
+                      (brace-list-close . -)
+;;                      (brace-list-close .
+;;                                        (c-lineup-arglist-close-under-paren -))
                       (arglist-intro .
                                      (c-lineup-arglist-intro-after-paren +))
                       (arglist-cont .
