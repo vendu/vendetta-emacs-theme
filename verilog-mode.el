@@ -2,11 +2,10 @@
 
 ;; verilog stuff
 
-;;;###autoload
 (defun vendetta-init-verilog-style()
   (custom-set-variables
    '((verilog-align-ifelse nil)
-     (verilog-tab-always-indent t)
+     (verilog-tab-always-indent nil)
      (verilog-auto-newline nil)
      (verilog-auto-indent-on-newline t)
      (verilog-indent-level 4)

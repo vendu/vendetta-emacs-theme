@@ -14,7 +14,6 @@
 
 (custom-theme-set-variables
  'vendetta
- '(vendetta-c-style "zero")
  '(inhibit-startup-screen t)
  '(tool-bar-mode nil)
  '(fill-column 72)
@@ -29,21 +28,19 @@
  '(font-lock-comment-delimiter-face
    ((t (:foreground "dark salmon" :slant italic))))
  '(font-lock-comment-face
-   ((t (:foreground "light goldenrod" :slant italic))))
+   ((t (:foreground "goldenrod" :slant italic))))
  '(font-lock-constant-face
    ((t (:foreground "light slate blue"))))
  '(font-lock-doc-face
    ((t (:foreground "light salmon" :slant italic))))
  '(font-lock-function-name-face
-   ((t (:foreground "forest green"))))
+   ((t (:foreground "lime green"))))
  '(font-lock-keyword-face
    ((t (:foreground "deep sky blue"))))
  '(font-lock-preprocessor-face
    ((t (:foreground "salmon"))))
-;; '(font-lock-preprocessor-face
-;;   ((t (:foreground "gold"))))
  '(font-lock-string-face
-   ((t (:foreground "orange"))))
+   ((t (:foreground "orange red"))))
  '(font-lock-type-face
    ((t (:foreground "lime green"))))
  '(font-lock-variable-name-face
@@ -59,11 +56,11 @@
   (add-hook 'before-save-hook 'xah-clean-whitespace)
   (add-hook 'emacs-lisp-mode-hook 'vendetta-emacs-lisp-mode-hook)
   (add-hook 'emacs-lisp-mode-hook 'eldoc-mode)
+  (add-hook 'c-mode-hook 'vendetta-c-mode)
   (add-hook 'asm-mode-hook 'vendetta-asm-mode-hook)
   (add-hook 'tex-mode-hook 'vendetta-tex-mode-hook)
   (add-hook 'tex-mode-hook 'visual-line-mode)
   (add-hook 'verilog-mode-hook 'vendetta-verilog-mode-hook))
-  (add-hook 'c-mode-hook 'vendetta-c-mode)
 
 (defun vendetta-theme-init()
 ;;  (load vendetta-init-file)

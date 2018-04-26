@@ -1,6 +1,5 @@
 ;; -*-no-byte-compile: t; -*-
 
-;;;###autoload
 (defun vendetta-init-tex-style()
   (custom-theme-set-variables
    'vendetta
