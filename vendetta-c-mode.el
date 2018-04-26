@@ -2,6 +2,7 @@
 
 ;; customizations for [c] programming
 
+<<<<<<< HEAD:c-mode.el
 (defconst vendetta-c-style "zero")
 
 (defconst vendetta-zero-c-style
@@ -9,40 +10,61 @@
     (c-label-minimum-indentation . +)
     (c-tab-always-indent . nil)
     (indent-tabs-mode . nil)
+=======
+(defconst vendetta-zero-c-style
+  '((c-electric-flag t)
+    (c-progress interval 1)
+    (c-tab-always-indent . t)
+>>>>>>> d9aac5c920cc6a0a591ae16f863d29ae44c71d17:vendetta-c-mode.el
     (c-syntactic-indentation . t)
     (c-syntactic-indentation-in-macros . t)
     (c-echo-syntactic-information-p . t)
     (c-indent-comments-syntactically-p . t)
     (c-strict-syntax-p . nil)
-    (c-backslash-column . fill-column)
-    (c-max-oneliner-length . fill-column)
+;;    (c-backslash-column fill-column)
+    ;;    (c-max-oneliner-length fill-column)
+    (c-backslash-column . 72)
     (c-auto-align-backslashes . t)
+    (c-electric-pound-behavior . (alignleft))
+    (c-basic-offset . 4)
+    (c-comment-only-line-offset . 0)
+    (c-label-minimum-indentation . +)
     (c-hanging-semi&comma-criteria .
                                    (c-semi&comma-no-newlines-before-nonblanks
                                     c-semi&comma-inside-parenlist))
     (c-offsets-alist .
                      ((string . 0)
                       (c . (c-lineup-C-comments 0))
+;;                      (comment-intro . (c-lineup-knr-region-comment
+;;                                        c-comment-only-line-offset
+;;                                        [0]))
                       (comment-intro . (c-lineup-knr-region-comment
                                         c-comment-only-line-offset
-                                        0))
-                      (cpp-macro . 0)
-                      (cpp-macro-cont . +)
+                                        [0]))
+                      (cpp-macro . [0])
+                      (cpp-macro-cont . 0)
+;;                      (cpp-macro-cont . (c-lineup-assignments
+;;                                         c-lineup-string-cont
+;;                                         c-lineup-cascaded-calls
+;;                                         c-lineup-math
+;;                                         [0]))
                       (cpp-define-intro . (c-lineup-cpp-define +))
-                      (defun-block-intro . (c-lineup-arglist-intro-after-paren))
+                      (defun-block-intro . +)
                       (defun-close . (c-lineup-close-paren))
                       (block-open . 0)
                       (block-close . 0)
-                      (topmost-intro . +)
-                      (topmost-intro-cont . (c-lineup-assignments
-                                             c-lineup-string-cont
-                                             c-lineup-cascaded-calls
-                                             c-lineup-math
+                      (topmost-intro . 0)
+                      (topmost-intro-cont . 0)
+                      (statement .
+                                 (vendetta-indent-c-label-intro
+                                  0))
+                      (statement-case-open . 0)
+                      (statement-case-intro .
+                                            (vendetta-indent-c-label-intro
                                              +))
-                      (statement . 0)
-                      (statement-case-open . +)
-                      (statement-case-intro . +)
-                      (statement-block-intro . (vendetta-indent-c-after-label +))
+                      (statement-block-intro .
+                                             (vendetta-indent-c-label-intro
+                                              +))
                       (statement-cont . (c-lineup-assignments
                                          c-lineup-string-cont
                                          c-lineup-cascaded-calls
@@ -57,9 +79,10 @@
                       (member-init-cont . +)
                       (brace-list-open . 0)
                       (brace-list-intro . +)
-                      (brace-list-entry . +)
-                      (brace-list-close .
-                                        (c-lineup-arglist-close-under-paren 0))
+                      (brace-list-entry . 0)
+                      (brace-list-close . -)
+;;                      (brace-list-close .
+;;                                        (c-lineup-arglist-close-under-paren -))
                       (arglist-intro .
                                      (c-lineup-arglist-intro-after-paren +))
                       (arglist-cont .
@@ -73,15 +96,20 @@
                                      0))
                       (arglist-cont-nonempty .
                                              (c-lineup-gcc-asm-reg
+                                              c-lineup-arglist
                                               c-lineup-assignments
                                               c-lineup-string-cont
                                               c-lineup-cascaded-calls
                                               c-lineup-arglist-operators
-                                              c-lineup-arglist
                                               c-lineup-math
                                               0))
                       (arglist-close . (c-lineup-arglist-close-under-paren 0))
-                      (func-decl-cont . 0)
+                      (func-decl-cont . (c-lineup-assignments
+                                             c-lineup-string-cont
+                                             c-lineup-cascaded-calls
+                                             c-lineup-math
+                                             0))
+                      (inclass . +)
                       (knr-argdecl-intro . -)
                       (knr-argdecl . 0)
                       (extern-lang-open . 0)
@@ -96,8 +124,9 @@
                              (block-close . c-snug-do-while)
                              (extern-lang-open after)))
     (c-hanging-colons-alist .
-                            ((label)
-                             (case-label)))
+                            ((label after)
+                             (case-label after)
+                             (member-init-intro before)))
     (c-cleanup-list .
                     (brace-else-brace
                      brace-elseif-brace
@@ -108,26 +137,42 @@
                      scope-operator
                      one-liner-defun)))
   "ZERO C Style")
-(c-add-style "zero" vendetta-zero-c-style)
 
+<<<<<<< HEAD:c-mode.el
 ;; this routine was modified from one donated by stack_pivot on reddit :)
 (defun vendetta-indent-c-after-label(symbol-and-anchor)
   (let* ((new-offset '++)
+=======
+;; this routine was edited from one donated by stack_pivot on reddit :)
+(defun vendetta-indent-c-label-intro(symbol-and-anchor)
+  (let* ((new-offset nil)
+>>>>>>> d9aac5c920cc6a0a591ae16f863d29ae44c71d17:vendetta-c-mode.el
          (anchor (cdr symbol-and-anchor))
          (anchor-line (line-number-at-pos anchor)))
-    (save-excursion
-      (goto-char anchor)
-      (search-forward-regexp ":[[:space:]]*[^[:space:]{]" nil t)
-      (if (and (> (point) anchor)
-               (= anchor-line (line-number-at-pos)))
-          (setq new-offset (- (point) anchor 1)))
-      new-offset)))
+        (save-excursion
+          (goto-char anchor)
+          (setq word (current-word))
+          (message "word: %s" 'word)
+          (if (or (eq word 'case-label)
+                  (eq word 'label))
+              (setq new-offset '++)))
+        new-offset))
+;;          (cond ((search-forward-regexp ":[[:space:]]*[^[:space:][;{]]" nil t)
+;;                 ;; did we find non-whitespace (and not just an open brace or
+;;                 ;; semicolon) after the colon on the case line?
+;;                 (if (and (> (point) anchor)
+;;                          (= anchor-line (line-number-at-pos)))
+;;                     (setq new-offset (- (point) anchor 1))))
+;;                ((search-forward-regexp ":[[:space:]]*" nil t)
+;;                 ;; colon followed by whitespace
+;;                 (setq new-offset '++)))))
+;;    new-offset))
 
 (defun vendetta-set-c-mode-defaults()
-  (add-hook 'c-special-indent-hook 'delete-trailing-whitespace)
+;;  (add-hook 'c-special-indent-hook 'delete-trailing-whitespace)
   (set-buffer-file-coding-system 'iso-latin-1-unix t)
   (define-key c-mode-base-map "\C-TAB" 'newline-and-indent)
-  (define-key c-mode-base-map [ret]  'newline-and-indent))
+  (define-key c-mode-base-map [ret] 'newline-and-indent))
 
 (defun vendetta-init-c-font-lock-style()
   (font-lock-add-keywords 'c-mode
@@ -138,14 +183,26 @@
                             ("NOTREACHED" 1 font-lock-warning-face prepend))))
 
 (defun vendetta-init-c-style()
-  (c-set-style vendetta-c-style)
+  (setq indent-tabs-mode nil)
+  (setq tab-always-indent t)
+  (c-toggle-electric-state t)
+;;  (c-toggle-auto-hungry-state t)
+  (c-add-style "zero" vendetta-zero-c-style)
+  (c-set-style "zero")
   (vendetta-set-c-mode-defaults)
   (vendetta-init-c-font-lock-style))
 
 (defun vendetta-c-mode()
+<<<<<<< HEAD:c-mode.el
   (setq tab-always-indent nil)
   (vendetta-init-c-style))
 
 (add-to-list 'auto-mode-alist "\\.[ch]\\" 'vendetta-c-mode)
 (add-to-list 'auto-mode-alist "\\.ino$\\" 'vendetta-c-mode)
+=======
+  (vendetta-init-c-style))
+
+;;(add-to-list 'auto-mode-alist "\\.[ch]\\" 'c-mode)
+(add-to-list 'auto-mode-alist "\\.ino$\\" 'c-mode)
+>>>>>>> d9aac5c920cc6a0a591ae16f863d29ae44c71d17:vendetta-c-mode.el
 

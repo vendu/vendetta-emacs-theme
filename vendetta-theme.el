@@ -3,13 +3,13 @@
 (deftheme vendetta "vendetta theme for programmers")
 
 (defconst vendetta-autoload-file "~/.emacs.d/loaddefs.el")
-(defconst vendetta-util-file "util")
-(defconst vendetta-init-file "init")
-(defconst vendetta-emacs-lisp-mode-file "emacs-lisp-mode")
-(defconst vendetta-c-mode-file "c-mode")
-(defconst vendetta-asm-mode-file "asm-mode")
-(defconst vendetta-tex-mode-file "tex-mode")
-(defconst vendetta-verilog-mode-file "verilog-mode")
+(defconst vendetta-util-file "vendetta-util")
+(defconst vendetta-init-file "vendetta-init")
+(defconst vendetta-emacs-lisp-mode-file "vendetta-emacs-lisp-mode")
+(defconst vendetta-c-mode-file "vendetta-c-mode")
+(defconst vendetta-asm-mode-file "vendetta-asm-mode")
+(defconst vendetta-tex-mode-file "vendetta-tex-mode")
+(defconst vendetta-verilog-mode-file "vendetta-verilog-mode")
 (defconst vendetta-custom-file "custom")
 
 (custom-theme-set-variables
@@ -63,9 +63,6 @@
   (add-hook 'verilog-mode-hook 'vendetta-verilog-mode-hook))
 
 (defun vendetta-theme-init()
-;;  (load vendetta-init-file)
-;;  (load vendetta-custom-file)
-;; make return key also do indent, globally
   (load vendetta-util-file)
   (load vendetta-emacs-lisp-mode-file)
   (load vendetta-c-mode-file)
