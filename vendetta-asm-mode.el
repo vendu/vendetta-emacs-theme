@@ -9,5 +9,6 @@
   (setq indent-line-function 'insert-tab)
   (local-unset-key (vector asm-comment-char)))
 
-(add-to-list 'auto-mode-alist "\\.asm$\\" 'asm-mode)
+(add-to-list 'auto-mode-alist "\\.asm$\\" 'asm-mode) ;; vpu/v0 assembly source
+(add-to-list 'auto-mode-alist "\\.def$\\" 'asm-mode) ;; vpu/v0 assembly header
 

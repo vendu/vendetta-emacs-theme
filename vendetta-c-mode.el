@@ -86,11 +86,11 @@
                                      0))
                       (arglist-cont-nonempty .
                                              (c-lineup-gcc-asm-reg
+                                              c-lineup-arglist
                                               c-lineup-assignments
                                               c-lineup-string-cont
                                               c-lineup-cascaded-calls
                                               c-lineup-arglist-operators
-                                              c-lineup-arglist
                                               c-lineup-math
                                               0))
                       (arglist-close . (c-lineup-arglist-close-under-paren 0))
