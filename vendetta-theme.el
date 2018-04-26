@@ -42,7 +42,7 @@
  '(font-lock-string-face
    ((t (:foreground "orange red"))))
  '(font-lock-type-face
-   ((t (:foreground "lime green"))))
+   ((t (:foreground "magenta"))))
  '(font-lock-variable-name-face
    ((t (:foreground "dark orange"))))
  '(font-lock-warning-face
