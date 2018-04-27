@@ -24,29 +24,43 @@
 (custom-theme-set-faces
  'vendetta
  '(font-lock-builtin-face
-   ((t (:foreground "medium spring green"))))
+   ((t (:foreground "deep pink"))))
  '(font-lock-comment-delimiter-face
-   ((t (:foreground "dark salmon" :slant italic))))
+   ((t (:foreground "sea green" :slant italic))))
  '(font-lock-comment-face
    ((t (:foreground "lime green" :slant italic))))
  '(font-lock-constant-face
-   ((t (:foreground "light slate blue"))))
- '(font-lock-doc-face
-   ((t (:foreground "light salmon" :slant italic))))
- '(font-lock-function-name-face
-   ((t (:foreground "gold"))))
- '(font-lock-keyword-face
-   ((t (:foreground "deep sky blue"))))
- '(font-lock-preprocessor-face
    ((t (:foreground "salmon"))))
+ '(font-lock-doc-face
+   ((t (:foreground "forest green" :slant italic))))
+ '(font-lock-function-name-face
+   ((t (:foreground "deep sky blue"))))
+ '(font-lock-keyword-face
+   ((t (:foreground "orange"))))
+ '(font-lock-preprocessor-face
+   ((t (:foreground "light slate blue"))))
  '(font-lock-string-face
-   ((t (:foreground "orange red"))))
- '(font-lock-type-face
-   ((t (:foreground "magenta"))))
- '(font-lock-variable-name-face
    ((t (:foreground "dark orange"))))
+ '(font-lock-type-face
+   ((t (:foreground "tomato"))))
+ '(font-lock-variable-name-face
+   ((t (:foreground "gold"))))
  '(font-lock-warning-face
-   ((t (:foreground "pink" :slant italic)))))
+   ((t (:foreground "magenta"))))
+ '(font-lock-qualifier-face
+   ((t (:foreground "dark orange"))))
+ '(font-lock-attribute-face
+   ((t (:foreground "dark orange"))))
+ '(font-lock-register-face
+   ((t (:foreground "medium sea green"))))
+ '(font-lock-memory-face
+   ((t (:foreground "indian red"))))
+ '(font-lock-machine-face
+   ((t (:foreground "light sea green"))))
+ '(font-lock-thread-face
+   ((t (:foreground "cyan"))))
+ '(font-lock-extern-face
+   ((t (:foreground "hot pink")))))
 
 (defun vendetta-init-hooks()
 ;;  (custom-set-variables
