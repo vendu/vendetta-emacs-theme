@@ -28,13 +28,13 @@
  '(font-lock-comment-delimiter-face
    ((t (:foreground "dark salmon" :slant italic))))
  '(font-lock-comment-face
-   ((t (:foreground "goldenrod" :slant italic))))
+   ((t (:foreground "lime green" :slant italic))))
  '(font-lock-constant-face
    ((t (:foreground "light slate blue"))))
  '(font-lock-doc-face
    ((t (:foreground "light salmon" :slant italic))))
  '(font-lock-function-name-face
-   ((t (:foreground "lime green"))))
+   ((t (:foreground "gold"))))
  '(font-lock-keyword-face
    ((t (:foreground "deep sky blue"))))
  '(font-lock-preprocessor-face
