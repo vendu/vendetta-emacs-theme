@@ -1,6 +1,5 @@
 ;; -*-no-byte-compile: t; -*-
 
-<<<<<<< HEAD:asm-mode.el
 (defun vendetta-indent-asm()
   (insert-tab)
   (let* ((new-offset 0)
@@ -13,9 +12,8 @@
                (= anchor-line (line-number-at-pos)))
           (setq new-offset (- (point) anchor 1)))
       new-offset)))
-=======
+
 (require 'asm-mode)
->>>>>>> d9aac5c920cc6a0a591ae16f863d29ae44c71d17:vendetta-asm-mode.el
 
 (defun vendetta-asm-mode-hook()
   (setq tab-width 4)
