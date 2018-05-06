@@ -36,19 +36,17 @@
  '(font-lock-function-name-face
    ((t (:foreground "deep sky blue"))))
  '(font-lock-keyword-face
-   ((t (:foreground "orange"))))
+   ((t (:foreground "green"))))
  '(font-lock-preprocessor-face
-   ((t (:foreground "light slate blue"))))
+   ((t (:foreground "dodger blue"))))
  '(font-lock-string-face
-   ((t (:foreground "dark orange"))))
+   ((t (:foreground "magenta"))))
  '(font-lock-type-face
-   ((t (:foreground "tomato"))))
+   ((t (:foreground "orange"))))
  '(font-lock-variable-name-face
    ((t (:foreground "gold"))))
  '(font-lock-warning-face
-   ((t (:foreground "magenta"))))
- '(font-lock-qualifier-face
-   ((t (:foreground "dark orange"))))
+   ((t (:foreground "red"))))
  '(font-lock-attribute-face
    ((t (:foreground "dark orange"))))
  '(font-lock-register-face
