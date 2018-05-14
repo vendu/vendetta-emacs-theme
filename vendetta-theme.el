@@ -17,6 +17,7 @@
  '(inhibit-startup-screen t)
  '(tool-bar-mode nil)
  '(fill-column 72)
+ '(auto-fill-mode nil)
  '(column-number-mode 1)
  '(comment-multi-line nil)
  '(filladapt-mode 1))
