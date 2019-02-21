@@ -17,8 +17,8 @@
     (c-echo-syntactic-information-p . t)
     (c-indent-comments-syntactically-p . t)
     (c-strict-syntax-p . nil)
-    ;;    (c-backslash-column fill-column)
-    ;;    (c-max-oneliner-length fill-column)
+    (c-backslash-column fill-column)
+    (c-max-oneliner-length fill-column)
     (c-backslash-column . 72)
     (c-auto-align-backslashes . t)
     (c-electric-pound-behavior . 'alignleft)
@@ -50,16 +50,19 @@
                       (block-close . 0)
                       (topmost-intro . 0)
                       (topmost-intro-cont . 0)
-                      (statement .
-                                 (vendetta-indent-c-label-intro
-                                  0))
+                      (statement . 0)
+;;                      (statement .
+;;                                 (vendetta-indent-c-label-intro
+;;                                  0))
                       (statement-case-open . 0)
-                      (statement-case-intro .
-                                            (vendetta-indent-c-label-intro
-                                             +))
-                      (statement-block-intro .
-                                             (vendetta-indent-c-label-intro
-                                              +))
+                      (statement-case-intro . +)
+;;                      (statement-case-intro .
+;;                                            (vendetta-indent-c-label-intro
+;;                                             +))
+                      (statement-block-intro . +)
+;;                      (statement-block-intro .
+;;                                             (vendetta-indent-c-label-intro
+;;                                              +))
                       (statement-cont . (c-lineup-assignments
                                          c-lineup-string-cont
                                          c-lineup-cascaded-calls
@@ -159,83 +162,83 @@
 (defun vendetta-init-c-type-font-lock-style()
   ;; c scalar types
   (font-lock-add-keywords 'c-mode
-			  '(("void" 1 font-lock-type-face prepend)
-                            ("signed" 1 font-lock-type-face prepend)
-                            ("unsigned" 1 font-lock-type-face prepend)
-                            ("char" 1 font-lock-type-face prepend)
-                            ("short" 1 font-lock-type-face prepend)
-                            ("int" 1 font-lock-type-face prepend)
-                            ("long" 1 font-lock-type-face prepend)
-                            ("int8_t" 1 font-lock-type-face prepend)
-                            ("uint8_t" 1 font-lock-type-face prepend)
-                            ("int16_t" 1 font-lock-type-face prepend)
-                            ("uint16_t" 1 font-lock-type-face prepend)
-                            ("int32_t" 1 font-lock-type-face prepend)
-                            ("uint32_t" 1 font-lock-type-face prepend)
-                            ("int64_t" 1 font-lock-type-face prepend)
-                            ("uint64_t" 1 font-lock-type-face prepend)))
+			  '(("\\<\\(void\\)\\>" 1 font-lock-type-face)
+                            ("\\<\\(signed\\)\\>" 1 font-lock-type-face)
+                            ("\\<\\(unsigned\\)\\>" 1 font-lock-type-face)
+                            ("\\<\\(char\\)\\>" 1 font-lock-type-face)
+                            ("\\<\\(short\\)\\>" 1 font-lock-type-face)
+                            ("\\<\\(int\\)\\>" 1 font-lock-type-face)
+                            ("\\<\\(long\\)\\>" 1 font-lock-type-face)
+                            ("\\<\\(int8_t\\)\\>" 1 font-lock-type-face)
+                            ("\\<\\(uint8_t\\)\\>" 1 font-lock-type-face)
+                            ("\\<\\(int16_t\\)\\>" 1 font-lock-type-face)
+                            ("\\<\\(uint16_t\\)\\>" 1 font-lock-type-face)
+                            ("\\<\\(int32_t\\)\\>" 1 font-lock-type-face)
+                            ("\\<\\(uint32_t\\)\\>" 1 font-lock-type-face)
+                            ("\\<\\(int64_t\\)\\>" 1 font-lock-type-face)
+                            ("\\<\\(uint64_t\\)\\>" 1 font-lock-type-face)))
   ;; c floating-point types
   (font-lock-add-keywords 'c-mode
-			  '(("float" 1 font-lock-type-face prepend)
-                            ("double" 1 font-lock-type-face prepend))))
+			  '(("\\<\\(float\\)\\>" 1 font-lock-type-face)
+                            ("\\<\\(double\\)\\>" 1 font-lock-type-face))))
 
 (defun vendetta-init-c-stdc-font-lock-style()
   ;; compiler features
   (font-lock-add-keywords 'c-mode
-			  '(("__thread" 1 font-lock-thread-face prepend)
-			    ("__attribute__" 1 font-lock-attribute-face)))
+			  '(("\\<\\(__thread\\)\\>" 1 font-lock-thread-face)
+			    ("\\<\\(__attribute__\\)\\>" 1 font-lock-attribute-face)))
   ;; machine-specific routines
   (font-lock-add-keywords 'c-mode
-			  '(("setjmp" 1 font-lock-machine-face prepend)
-			    ("sigsetjmp" 1 font-lock-machine-face prepend)
-			    ("longjmp" 1 font-lock-machine-face prepend)
-			    ("siglongjmp" 1 font-lock-machine-face prepend)
-			    ("alloca" 1 font-lock-memory-face prepend)))
+			  '(("\\<\\(setjmp\\)\\>" 1 font-lock-machine-face)
+			    ("\\<\\(sigsetjmp\\)\\>" 1 font-lock-machine-face)
+			    ("\\<\\(longjmp\\)\\>" 1 font-lock-machine-face)
+			    ("\\<\\(siglongjmp\\)\\>" 1 font-lock-machine-face)
+			    ("\\<\\(alloca\\)\\>" 1 font-lock-memory-face)))
   ;; memory management
   (font-lock-add-keywords 'c-mode
-			  '(("malloc" 1 font-lock-memory-face prepend)
-			    ("free" 1 font-lock-memory-face prepend)
-			    ("realloc" 1 font-lock-memory-face prepend)
-			    ("calloc" 1 font-lock-memory-face prepend)
-			    ("posix_memalign" 1 font-lock-memory-face prepend)
-			    ("valloc" 1 font-lock-memory-face prepend)))
+			  '(("\\<\\(malloc\\)\\>" 1 font-lock-memory-face)
+			    ("\\<\\(free\\)\\>" 1 font-lock-memory-face)
+			    ("\\<\\(realloc\\)\\>" 1 font-lock-memory-face)
+			    ("\\<\\(calloc\\)\\>" 1 font-lock-memory-face)
+			    ("\\<\\(posix_memalign\\)\\>" 1 font-lock-memory-face)
+			    ("\\<\\(valloc\\)\\>" 1 font-lock-memory-face)))
   ;; POSIX threads
   (font-lock-add-keywords 'c-mode
-			  '(("pthread_self" 1 font-lock-thread-face prepend)
-			    ("pthread_create" 1 font-lock-thread-face prepend)
-			    ("pthread_detach" 1 font-lock-thread-face prepend)
-			    ("pthread_exit" 1 font-lock-thread-face prepend)
-			    ("pthread_kill" 1 font-lock-thread-face prepend)
-			    ("pthread_mutex_init" 1 font-lock-thread-face prepend)
-			    ("pthread_mutex_trylock" 1 font-lock-thread-face prepend)
-			    ("pthread_mutex_lock" 1 font-lock-thread-face prepend)
-			    ("pthread_mutex_unlock" 1 font-lock-thread-face prepend)
-			    ("pthread_mutex_timedlock" 1 font-lock-thread-face prepend)
-			    ("pthread_mutex_init" 1 font-lock-thread-face prepend))))
+			  '(("\\<\\(pthread_self\\)\\>" 1 font-lock-thread-face)
+			    ("\\<\\(pthread_create\\)\\>" 1 font-lock-thread-face)
+			    ("\\<\\(pthread_detach\\)\\>" 1 font-lock-thread-face)
+			    ("\\<\\(pthread_exit\\)\\>" 1 font-lock-thread-face)
+			    ("\\<\\(pthread_kill\\)\\>" 1 font-lock-thread-face)
+			    ("\\<\\(pthread_mutex_init\\)\\>" 1 font-lock-thread-face)
+			    ("\\<\\(pthread_mutex_trylock\\)\\>" 1 font-lock-thread-face)
+			    ("\\<\\(pthread_mutex_lock\\)\\>" 1 font-lock-thread-face)
+			    ("\\<\\(pthread_mutex_unlock\\)\\>" 1 font-lock-thread-face)
+			    ("\\<\\(pthread_mutex_timedlock\\)\\>" 1 font-lock-thread-face)
+			    ("\\<\\(pthread_mutex_init\\)\\>" 1 font-lock-thread-face))))
 
 (defun vendetta-init-c-zero-font-lock-style()
   (font-lock-add-keywords 'c-mode
-			  '(("INLINE" 1 font-lock-function-face prepend)
-			    ("NOINLINE" 1 font-lock-function-face prepend)
-			    ("FASTCALL" 1 font-lock-function-face prepend)
-			    ("PURE" 1 font-lock-function-face prepend)
-			    ("CONST" 1 font-lock-constant-face prepend)
-			    ("NORETURN" 1 font-lock-function-face prepend)
-			    ("THREADLOCAL" 1 font-lock-thread-face prepend)
-			    ("ALIGNED" 1 font-lock-memory-face prepend)
-			    ("PACKED" 1 font-lock-memory-face prepend)
-			    ("REGPARM" 1 font-lock-register-face prepend)
-			    ("ASMLINK" 1 font-lock-function-face prepend)
-			    ("__asm__" 1 font-lock-machine-face prepend)
-			    ("__volatile__" 1 font-lock-volatile-face prepend)))
+			  '(("\\<\\(INLINE\\)\\>" 1 font-lock-function-face)
+			    ("\\<\\(NOINLINE\\)\\>" 1 font-lock-function-face)
+			    ("\\<\\(FASTCALL\\)\\>" 1 font-lock-function-face)
+			    ("\\<\\(PURE\\)\\>" 1 font-lock-function-face)
+			    ("\\<\\(CONST\\)\\>" 1 font-lock-constant-face)
+			    ("\\<\\(NORETURN\\)\\>" 1 font-lock-function-face)
+			    ("\\<\\(THREADLOCAL\\)\\>" 1 font-lock-thread-face)
+			    ("\\<\\(ALIGNED\\)\\>" 1 font-lock-memory-face)
+			    ("\\<\\(PACKED\\)\\>" 1 font-lock-memory-face)
+			    ("\\<\\(REGPARM\\)\\>" 1 font-lock-register-face)
+			    ("\\<\\(ASMLINK\\)\\>" 1 font-lock-function-face)
+			    ("\\<\\(__asm__\\)\\>" 1 font-lock-machine-face)
+			    ("\\<\\(__volatile__\\)\\>" 1 font-lock-volatile-face)))
   (font-lock-add-keywords 'c-mode
-			  '(("FIXME" 1 font-lock-warning-face prepend)
-			    ("TODO" 1 font-lock-warning-face prepend)
-			    ("WONTFIX" 1 font-lock-warning-face prepend)
-			    ("FALLTHRU" 1 font-lock-doc-face prepend)
-			    ("NOTE" 1 font-lock-doc-face prepend)
-			    ("REFERENCE" 1 font-lock-constant-face prepend)
-			    ("NOTREACHED" 1 font-lock-warning-face prepend))))
+			  '(("\\<\\(FIXME\\)\\>" 1 font-lock-warning-face)
+			    ("\\<\\(TODO\\)\\>" 1 font-lock-warning-face)
+			    ("\\<\\(WONTFIX\\)\\>" 1 font-lock-warning-face)
+			    ("\\<\\(FALLTHRU\\)\\>" 1 font-lock-doc-face)
+			    ("\\<\\(NOTE\\)\\>" 1 font-lock-doc-face)
+			    ("\\<\\(REFERENCE\\)\\>" 1 font-lock-constant-face)
+			    ("\\<\\(NOTREACHED\\)\\>" 1 font-lock-warning-face))))
 
 (defun vendetta-init-c-font-lock-style()
   (vendetta-init-c-type-font-lock-style)
@@ -264,4 +267,3 @@
 
 ;;(add-to-list 'auto-mode-alist "\\.[ch]\\" 'c-mode)
 (add-to-list 'auto-mode-alist "\\.ino$\\" 'c-mode)
-

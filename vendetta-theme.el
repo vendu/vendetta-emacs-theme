@@ -4,7 +4,7 @@
 
 (defconst vendetta-autoload-file "~/.emacs.d/loaddefs.el")
 (defconst vendetta-util-file "vendetta-util")
-(defconst vendetta-init-file "vendetta-init")
+;; (defconst vendetta-init-file "vendetta-init")
 (defconst vendetta-emacs-lisp-mode-file "vendetta-emacs-lisp-mode")
 (defconst vendetta-c-mode-file "vendetta-c-mode")
 (defconst vendetta-asm-mode-file "vendetta-asm-mode")
@@ -27,13 +27,13 @@
  '(font-lock-builtin-face
    ((t (:foreground "deep pink"))))
  '(font-lock-comment-delimiter-face
-   ((t (:foreground "sea green" :slant italic))))
+   ((t (:foreground "dark orange"))))
  '(font-lock-comment-face
-   ((t (:foreground "lime green" :slant italic))))
+   ((t (:foreground "orange"))))
  '(font-lock-constant-face
    ((t (:foreground "salmon"))))
  '(font-lock-doc-face
-   ((t (:foreground "forest green" :slant italic))))
+   ((t (:foreground "forest green"))))
  '(font-lock-function-name-face
    ((t (:foreground "deep sky blue"))))
  '(font-lock-keyword-face
@@ -41,7 +41,7 @@
  '(font-lock-preprocessor-face
    ((t (:foreground "dodger blue"))))
  '(font-lock-string-face
-   ((t (:foreground "magenta"))))
+   ((t (:foreground "light salmon"))))
  '(font-lock-type-face
    ((t (:foreground "orange"))))
  '(font-lock-variable-name-face
@@ -64,7 +64,7 @@
 (defun vendetta-init-hooks()
 ;;  (custom-set-variables
 ;;   '(text-mode-hook (quote (turn-on-auto-fill text-mode-hook-identify))))
-;;  (add-hook 'after-save-hook 'vendetta-emacs-lisp-after-save-hook)
+  ;;  (add-hook 'after-save-hook 'vendetta-emacs-lisp-after-save-hook)
 ;;  (add-hook 'before-save-hook 'delete-trailing-whitespace)
   (add-hook 'before-save-hook 'xah-clean-whitespace)
   (add-hook 'emacs-lisp-mode-hook 'vendetta-emacs-lisp-mode-hook)
@@ -91,4 +91,3 @@
 ;(add-to-list 'auto-mode-alist "\\.tex\\" tex-mode)
 
 (provide-theme 'vendetta)
-

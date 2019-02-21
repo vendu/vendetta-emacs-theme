@@ -16,7 +16,7 @@
 	(insert ";;")
 	(save-buffer)))
     (mapc #'update-directory-autoloads
-	  '("~" "~/.emacs.d/lisp/" "~/.elisp/" "/tmp/")))))
+	  '("~~" "~~/.emacs.d/lisp/" "~~/.elisp/" "/tmp/")))))
 
 ;; whitespace cleaning routines from Xah Lee
 
@@ -75,13 +75,13 @@
   (progn
     ;;  Make whitespace-mode with very basic background coloring for whitespaces.
     ;; http://ergoemacs.org/emacs/whitespace-mode.html
-    (setq whitespace-style (quote (face spaces tabs newline space-mark tab-mark newline-mark )))
-    ;; Make whitespace-mode and whitespace-newline-mode use “¶” for end of line
-    ;; char and “▷” for tab.
+    (setq whitespace-style (quote (face spaces tabs newline space-mark tab-mark newline-mark)))
+    ;; Make whitespace-mode and whitespace-newline-mode use ~{!0~}\u00B6~{!1~} for end of line
+    ;; char and ~{!0~}\u25B7~{!1~} for tab.
     (setq whitespace-display-mappings
           ;; all numbers are unicode codepoint in decimal. e.g. (insert-char 182 1)
           '(
-            (space-mark 32 [183] [46]) ; SPACE 32 「 」, 183 MIDDLE DOT 「·」, 46 FULL STOP 「.」
+            (space-mark 32 [183] [46]) ; SPACE 32 ~{!8~} ~{!9~}, 183 MIDDLE DOT ~{!8~}\u00B7~{!9~}, 46 FULL STOP ~{!8~}.~{!9~}
             (newline-mark 10 [182 10]) ; LINE FEED,
             (tab-mark 9 [9655 9] [92 9]) ; tab
             ))))
