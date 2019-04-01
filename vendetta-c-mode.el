@@ -67,7 +67,8 @@
                                          c-lineup-string-cont
                                          c-lineup-cascaded-calls
                                          c-lineup-math
-                                         +))
+                                         0))
+;                                         +))
                       (substatement . +)
                       (substatement-open . 0)
                       (substatement-label . +)
