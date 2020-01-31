@@ -18,7 +18,8 @@
   (setq tab-always-indent nil)
   (setq indent-tabs-mode t)
   (setq indent-line-function 'vendetta-indent-asm)
-  (local-unset-key (vector asm-comment-char)))
+  (local-unset-key (vector asm-comment-char))
+  (font-lock-fontify-buffer))
 
 (add-to-list 'auto-mode-alist "\\.s$\\" 'asm-mode)   ;; unpreprocessed assembly
 (add-to-list 'auto-mode-alist "\\.S$\\" 'asm-mode)   ;; c-preprocessed assembly

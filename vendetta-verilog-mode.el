@@ -24,7 +24,7 @@
   (setq verilog-auto-template-warn-unused t)
   (setq verilog-auto-undef t)
   (setq verilog-auto-unused t)
-  (setq verilog-auto-lineup 'directives)
+  (setq verilog-auto-lineup '(all))
   (setq verilog-auto-endcomments t)
   (setq verilog-tab-to-comment nil)
   (setq verilog-date-scientific-format t)
@@ -35,7 +35,8 @@
   (setq verilog-highlight-p1800-keywords t))
 
 (defun vendetta-verilog-mode-hook()
-  (vendetta-init-zero-verilog-style))
+  (vendetta-init-zero-verilog-style)
+  (font-lock-fontify-buffer))
 
 ;;(add-to-list 'auto-mode-alist '("\\.[ds]?va?h?\\'" . verilog-mode))
 (add-to-list 'auto-mode-alist "\\.v$\\'" 'verilog-mode)
@@ -43,4 +44,3 @@
 (add-to-list 'auto-mode-alist "\\.dv$\\'" 'verilog-mode)
 (add-to-list 'auto-mode-alist "testfixture.verilog" 'verilog-mode)
 (add-to-list 'auto-mode-alist "testfixture.template" 'verilog-mode)
-

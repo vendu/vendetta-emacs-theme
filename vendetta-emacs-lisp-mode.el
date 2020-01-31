@@ -6,5 +6,6 @@
   ;;	    (define-key flyspell-mode-map "\M-\t" nil)
   (setq indent-tabs-mode nil)
   (define-key emacs-lisp-mode-map "\C-x\C-e" 'pp-eval-last-sexp)
-  (define-key emacs-lisp-mode-map [ret] 'reindent-then-newline-and-indent))
+  (define-key emacs-lisp-mode-map [ret] 'reindent-then-newline-and-indent)
+  (font-lock-fontify-buffer))
 

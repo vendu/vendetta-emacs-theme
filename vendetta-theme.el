@@ -25,6 +25,7 @@
 
 (custom-theme-set-faces
  'vendetta
+ '(default ((t (:background black :foreground white))))
  '(font-lock-builtin-face
    ((t (:foreground "deep pink"))))
  '(font-lock-comment-delimiter-face
@@ -35,18 +36,24 @@
    ((t (:foreground "salmon"))))
  '(font-lock-doc-face
    ((t (:foreground "forest green"))))
+ '(font-lock-doc-string-face
+   ((t (:foreground "forest green"))))
  '(font-lock-function-name-face
-   ((t (:foreground "deep sky blue"))))
+   ((t (:foreground "dark slate blue"))))
  '(font-lock-keyword-face
    ((t (:foreground "green"))))
  '(font-lock-preprocessor-face
-   ((t (:foreground "dodger blue"))))
+   ((t (:foreground "light slate blue"))))
  '(font-lock-string-face
    ((t (:foreground "light salmon"))))
  '(font-lock-type-face
    ((t (:foreground "orange"))))
+ '(font-lock-aggregate-face
+   ((t (:foreground "orange red"))))
  '(font-lock-variable-name-face
-   ((t (:foreground "gold"))))
+   ((t (:foreground "light goldenrod"))))
+ '(font-lock-negation-char-face
+   ((t (:foreground "orange"))))
  '(font-lock-warning-face
    ((t (:foreground "red"))))
  '(font-lock-attribute-face
@@ -66,10 +73,12 @@
 ;;  (custom-set-variables
 ;;   '(text-mode-hook (quote (turn-on-auto-fill text-mode-hook-identify))))
   ;;  (add-hook 'after-save-hook 'vendetta-emacs-lisp-after-save-hook)
-;;  (add-hook 'before-save-hook 'delete-trailing-whitespace)
-  (add-hook 'before-save-hook 'xah-clean-whitespace)
+  ;;  (add-hook 'before-save-hook 'delete-trailing-whitespace)
+  (add-hook 'before-save-hook 'strip-trailing-whitespace)
+  ;;  (add-hook 'before-save-hook 'xah-clean-whitespace)
+  (add-hook 'before-save-hook 'collapse-blank-lines)
   (add-hook 'emacs-lisp-mode-hook 'vendetta-emacs-lisp-mode-hook)
-  (add-hook 'emacs-lisp-mode-hook 'eldoc-mode)
+;;  (add-hook 'emacs-lisp-mode-hook 'eldoc-mode)
   (add-hook 'c-mode-hook 'vendetta-c-mode-hook)
   (add-hook 'asm-mode-hook 'vendetta-asm-mode-hook)
   (add-hook 'tex-mode-hook 'vendetta-tex-mode-hook)
@@ -83,10 +92,9 @@
   (load vendetta-asm-mode-file)
   (load vendetta-tex-mode-file)
   (load vendetta-verilog-mode-file)
-  (xah-init-whitespace)
+;;  (xah-init-whitespace)
   (vendetta-init-hooks))
 
 (vendetta-theme-init)
 
 (provide-theme 'vendetta)
-
