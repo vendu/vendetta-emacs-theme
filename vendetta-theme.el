@@ -25,7 +25,6 @@
 
 (custom-theme-set-faces
  'vendetta
- '(default ((t (:background black :foreground white))))
  '(font-lock-builtin-face
    ((t (:foreground "deep pink"))))
  '(font-lock-comment-delimiter-face
@@ -39,11 +38,13 @@
  '(font-lock-doc-string-face
    ((t (:foreground "forest green"))))
  '(font-lock-function-name-face
-   ((t (:foreground "dark slate blue"))))
+   ((t (:foreground "midnight blue"))))
+ ;;   ((t (:foreground "deep sky blue"))))
  '(font-lock-keyword-face
    ((t (:foreground "green"))))
  '(font-lock-preprocessor-face
-   ((t (:foreground "light slate blue"))))
+   ;;   ((t (:foreground "light slate blue"))))
+   ((t (:foreground "light sky blue"))))
  '(font-lock-string-face
    ((t (:foreground "light salmon"))))
  '(font-lock-type-face
@@ -70,15 +71,15 @@
    ((t (:foreground "hot pink")))))
 
 (defun vendetta-init-hooks()
-;;  (custom-set-variables
-;;   '(text-mode-hook (quote (turn-on-auto-fill text-mode-hook-identify))))
+  ;;  (custom-set-variables
+  ;;   '(text-mode-hook (quote (turn-on-auto-fill text-mode-hook-identify))))
   ;;  (add-hook 'after-save-hook 'vendetta-emacs-lisp-after-save-hook)
   ;;  (add-hook 'before-save-hook 'delete-trailing-whitespace)
   (add-hook 'before-save-hook 'strip-trailing-whitespace)
   ;;  (add-hook 'before-save-hook 'xah-clean-whitespace)
   (add-hook 'before-save-hook 'collapse-blank-lines)
   (add-hook 'emacs-lisp-mode-hook 'vendetta-emacs-lisp-mode-hook)
-;;  (add-hook 'emacs-lisp-mode-hook 'eldoc-mode)
+  ;;  (add-hook 'emacs-lisp-mode-hook 'eldoc-mode)
   (add-hook 'c-mode-hook 'vendetta-c-mode-hook)
   (add-hook 'asm-mode-hook 'vendetta-asm-mode-hook)
   (add-hook 'tex-mode-hook 'vendetta-tex-mode-hook)
@@ -92,7 +93,7 @@
   (load vendetta-asm-mode-file)
   (load vendetta-tex-mode-file)
   (load vendetta-verilog-mode-file)
-;;  (xah-init-whitespace)
+  ;;  (xah-init-whitespace)
   (vendetta-init-hooks))
 
 (vendetta-theme-init)

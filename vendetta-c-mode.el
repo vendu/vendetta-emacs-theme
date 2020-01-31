@@ -226,44 +226,44 @@
   (font-lock-add-keywords 'c-mode
 						  '(("\\<\\(float\\)\\>" 1 font-lock-type-face)
 							("\\<\\(double\\)\\>" 1 font-lock-type-face)
-							("\\<\\(long double\\)\\>" 1 font-lock-type-face)))
+							("\\<\\(long double\\)\\>" 1 font-lock-type-face))))
 
-  (defun vendetta-init-c-stdc-font-lock-style()
-	;;
-	;; type qualifiers
-	(font-lock-add-keywords 'c-mode
-							'(("\\<\\(static\\)\\>" 1 font-lock-attribute-face)
-							  ("\\<\\(const\\)\\>" 1 font-lock-attribute-face)
-							  ("\\<\\(extern\\)\\>" 1 font-lock-attribute-face)
-							  ("\\<\\(volatile\\)\\>" 1 font-lock-attribute-face)))
-	;; compiler features
-	(font-lock-add-keywords 'c-mode
-							'(("\\<\\(_Thread_local\\)\\>" 1 font-lock-thread-face)
-							  ("\\<\\(__thread\\)\\>" 1 font-lock-thread-face)
-							  ("\\<\\(__attribute__\\)\\>" 1 font-lock-attribute-face)
-							  ("\\<\\(__inline__\\)\\>" 1 font-lock-attribute-face)
-							  ("\\<\\(__always_inline__\\)\\>" 1 font-lock-attribute-face)
-							  ("\\<\\(__noreturn__\\)\\>" 1 font-lock-attribute-face)
-							  ("\\<\\(__declspec\\)\\>" 1 font-lock-attribute-face)))
-	;; machine-specific routines
-	(font-lock-add-keywords 'c-mode
-							'(("\\<\\(setjmp\\)\\>" 1 font-lock-machine-face)
-							  ("\\<\\(sigsetjmp\\)\\>" 1 font-lock-machine-face)
-							  ("\\<\\(longjmp\\)\\>" 1 font-lock-machine-face)
-							  ("\\<\\(siglongjmp\\)\\>" 1 font-lock-machine-face)
-							  ("\\<\\(alloca\\)\\>" 1 font-lock-warning-face)))
-	;; memory management
-	(font-lock-add-keywords 'c-mode
-							'(("\\<\\(malloc\\)\\>" 1 font-lock-memory-face)
-							  ("\\<\\(free\\)\\>" 1 font-lock-memory-face)
-							  ("\\<\\(realloc\\)\\>" 1 font-lock-memory-face)
-							  ("\\<\\(calloc\\)\\>" 1 font-lock-memory-face)
-							  ("\\<\\(aligned_alloc\\)\\>" 1 font-lock-memory-face)
-							  ("\\<\\(posix_memalign\\)\\>" 1 font-lock-memory-face)
-							  ("\\<\\(mmap\\)\\>" 1 font-lock-memory-face)
-							  ("\\<\\(sbrk\\)\\>" 1 font-lock-warning-face)
-							  ("\\<\\(valloc\\)\\>" 1 font-lock-memory-face)
-							  ("\\<\\(pvalloc\\)\\>" 1 font-lock-memory-face))))
+(defun vendetta-init-c-stdc-font-lock-style()
+  ;;
+  ;; type qualifiers
+  (font-lock-add-keywords 'c-mode
+						  '(("\\<\\(static\\)\\>" 1 font-lock-attribute-face)
+							("\\<\\(const\\)\\>" 1 font-lock-attribute-face)
+							("\\<\\(extern\\)\\>" 1 font-lock-attribute-face)
+							("\\<\\(volatile\\)\\>" 1 font-lock-attribute-face)))
+  ;; compiler features
+  (font-lock-add-keywords 'c-mode
+						  '(("\\<\\(_Thread_local\\)\\>" 1 font-lock-thread-face)
+							("\\<\\(__thread\\)\\>" 1 font-lock-thread-face)
+							("\\<\\(__attribute__\\)\\>" 1 font-lock-attribute-face)
+							("\\<\\(__inline__\\)\\>" 1 font-lock-attribute-face)
+							("\\<\\(__always_inline__\\)\\>" 1 font-lock-attribute-face)
+							("\\<\\(__noreturn__\\)\\>" 1 font-lock-attribute-face)
+							("\\<\\(__declspec\\)\\>" 1 font-lock-attribute-face)))
+  ;; machine-specific routines
+  (font-lock-add-keywords 'c-mode
+						  '(("\\<\\(setjmp\\)\\>" 1 font-lock-machine-face)
+							("\\<\\(sigsetjmp\\)\\>" 1 font-lock-machine-face)
+							("\\<\\(longjmp\\)\\>" 1 font-lock-machine-face)
+							("\\<\\(siglongjmp\\)\\>" 1 font-lock-machine-face)
+							("\\<\\(alloca\\)\\>" 1 font-lock-warning-face)))
+  ;; memory management
+  (font-lock-add-keywords 'c-mode
+						  '(("\\<\\(malloc\\)\\>" 1 font-lock-memory-face)
+							("\\<\\(free\\)\\>" 1 font-lock-memory-face)
+							("\\<\\(realloc\\)\\>" 1 font-lock-memory-face)
+							("\\<\\(calloc\\)\\>" 1 font-lock-memory-face)
+							("\\<\\(aligned_alloc\\)\\>" 1 font-lock-memory-face)
+							("\\<\\(posix_memalign\\)\\>" 1 font-lock-memory-face)
+							("\\<\\(mmap\\)\\>" 1 font-lock-memory-face)
+							("\\<\\(sbrk\\)\\>" 1 font-lock-warning-face)
+							("\\<\\(valloc\\)\\>" 1 font-lock-memory-face)
+							("\\<\\(pvalloc\\)\\>" 1 font-lock-memory-face)))
   ;; re-entrant routines
   (font-lock-add-keywords 'c-mode
 						  '(("\\<\\(*_r\\)\\>" 1 font-lock-thread-face)))
@@ -322,6 +322,7 @@
   (vendetta-init-c-font-lock-style))
 
 (defun vendetta-c-mode-hook()
+  (setq tab-width 4)
   (setq tab-always-indent nil)
   (vendetta-init-zero-c-style)
   (font-lock-fontify-buffer))
@@ -330,3 +331,4 @@
 
 (add-to-list 'auto-mode-alist "\\.[ch]$\\" 'c-mode)
 (add-to-list 'auto-mode-alist "\\.ino$\\" 'c-mode)
+
