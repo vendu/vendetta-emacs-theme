@@ -21,6 +21,5 @@
                                                     :scale 1.5)))))))
 
 (defun vendetta-tex-mode-hook()
-  (vendetta-init-tex-style)
-  (font-lock-fontify-buffer))
+  (vendetta-init-tex-style))
 
