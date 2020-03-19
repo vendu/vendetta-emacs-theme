@@ -1,5 +1,3 @@
-;; -*-no-byte-compile: t; -*-
-
 (defconst local-bytecode-path "~/.emacs.d/bytecode/")
 (defconst local-theme "vendetta")
 (defconst local-theme-path "~/.emacs.d/themes/")

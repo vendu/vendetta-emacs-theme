@@ -1,4 +1,4 @@
-;; -*-no-byte-compile: t; -*-
+(require 'asm-mode)
 
 (defun vendetta-init-asm-font-lock-style()
   (font-lock-add-keywords 'asm-mode
@@ -53,9 +53,4 @@
   ;;  (setq asm-comment-column 4)
   (setq indent-line-function 'vendetta-indent-asm-line))
 ;;  (local-unset-key (vector asm-comment-char))
-
-(add-to-list 'auto-mode-alist "\\.s$\\" 'asm-mode)   ;; unpreprocessed assembly
-(add-to-list 'auto-mode-alist "\\.S$\\" 'asm-mode)   ;; c-preprocessed assembly
-(add-to-list 'auto-mode-alist "\\.asm$\\" 'asm-mode) ;; vpu/v0 assembly source
-(add-to-list 'auto-mode-alist "\\.def$\\" 'asm-mode) ;; vpu/v0 assembly header
 

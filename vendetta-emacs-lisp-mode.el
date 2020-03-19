@@ -1,5 +1,3 @@
-;; -*-no-byte-compile: t; -*-
-
 ;; emacs lisp functionality
 
 (defun vendetta-emacs-lisp-mode-hook()

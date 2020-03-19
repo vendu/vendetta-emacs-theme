@@ -1,5 +1,3 @@
-;; -*-no-byte-compile: t; -*-
-
 ;; verilog stuff
 
 
@@ -62,11 +60,4 @@
   (vendetta-init-velho-verilog-font-lock-style)
   (add-hook 'local-write-file-hooks
 			(lambda() (untabify (point-min) (point-max)))))
-
-;;(add-to-list 'auto-mode-alist '("\\.[ds]?va?h?\\'" . verilog-mode))
-(add-to-list 'auto-mode-alist "\\.v$\\'" 'verilog-mode)
-(add-to-list 'auto-mode-alist "\\.vh$\\'" 'verilog-mode)
-(add-to-list 'auto-mode-alist "\\.dv$\\'" 'verilog-mode)
-(add-to-list 'auto-mode-alist "testfixture.verilog" 'verilog-mode)
-(add-to-list 'auto-mode-alist "testfixture.template" 'verilog-mode)
 

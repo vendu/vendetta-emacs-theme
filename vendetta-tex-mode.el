@@ -1,5 +1,3 @@
-;; -*-no-byte-compile: t; -*-
-
 (defun vendetta-init-tex-style()
   (custom-theme-set-variables
    'vendetta

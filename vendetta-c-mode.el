@@ -1,8 +1,8 @@
-;; -*-no-byte-compile: t; -*-
-
 ;; customizations for [c] programming
 
 (defconst vendetta-c-style "zero")
+
+(defalias 'font-lock-ensure 'font-lock-fontify-buffer)
 
 (defconst vendetta-zero-c-style
   '((c-basic-offset . 4)
@@ -30,19 +30,19 @@
     (c-offsets-alist .
                      ((string . 0)
                       (c . (c-lineup-C-comments 0))
-					  ;;                      (comment-intro . (c-lineup-knr-region-comment
-					  ;;                                        c-comment-only-line-offset
-					  ;;                                        [0]))
+                      ;;                      (comment-intro . (c-lineup-knr-region-comment
+                      ;;                                        c-comment-only-line-offset
+                      ;;                                        [0]))
                       (comment-intro . (c-lineup-knr-region-comment
                                         c-comment-only-line-offset
                                         [0]))
                       (cpp-macro . [0])
                       (cpp-macro-cont . 0)
-					  ;;                      (cpp-macro-cont . (c-lineup-assignments
-					  ;;                                         c-lineup-string-cont
-					  ;;                                         c-lineup-cascaded-calls
-					  ;;                                         c-lineup-math
-					  ;;                                         [0]))
+                      ;;                      (cpp-macro-cont . (c-lineup-assignments
+                      ;;                                         c-lineup-string-cont
+                      ;;                                         c-lineup-cascaded-calls
+                      ;;                                         c-lineup-math
+                      ;;                                         [0]))
                       (cpp-define-intro . (c-lineup-cpp-define +))
                       (defun-block-intro . +)
                       (defun-close . (c-lineup-close-paren))
@@ -51,24 +51,24 @@
                       (topmost-intro . 0)
                       (topmost-intro-cont . 0)
                       (statement . 0)
-					  ;;                      (statement .
-					  ;;                                 (vendetta-indent-c-label-intro
-					  ;;                                  0))
+                      ;;                      (statement .
+                      ;;                                 (vendetta-indent-c-label-intro
+                      ;;                                  0))
                       (statement-case-open . 0)
                       (statement-case-intro . +)
-					  ;;                      (statement-case-intro .
-					  ;;                                            (vendetta-indent-c-label-intro
-					  ;;                                             +))
+                      ;;                      (statement-case-intro .
+                      ;;                                            (vendetta-indent-c-label-intro
+                      ;;                                             +))
                       (statement-block-intro . +)
-					  ;;                      (statement-block-intro .
-					  ;;                                             (vendetta-indent-c-label-intro
-					  ;;                                              +))
+                      ;;                      (statement-block-intro .
+                      ;;                                             (vendetta-indent-c-label-intro
+                      ;;                                              +))
                       (statement-cont . (c-lineup-assignments
                                          c-lineup-string-cont
                                          c-lineup-cascaded-calls
                                          c-lineup-math
                                          0))
-										;                                         +))
+                                        ;                                         +))
                       (substatement . +)
                       (substatement-open . 0)
                       (substatement-label . +)
@@ -80,8 +80,8 @@
                       (brace-list-intro . +)
                       (brace-list-entry . 0)
                       (brace-list-close . -)
-					  ;;                      (brace-list-close .
-					  ;;                                        (c-lineup-arglist-close-under-paren -))
+                      ;;                      (brace-list-close .
+                      ;;                                        (c-lineup-arglist-close-under-paren -))
                       (arglist-intro .
                                      (c-lineup-arglist-intro-after-paren +))
                       (arglist-cont .
@@ -104,10 +104,10 @@
                                               0))
                       (arglist-close . (c-lineup-arglist-close-under-paren 0))
                       (func-decl-cont . (c-lineup-assignments
-										 c-lineup-string-cont
-										 c-lineup-cascaded-calls
-										 c-lineup-math
-										 0))
+                                         c-lineup-string-cont
+                                         c-lineup-cascaded-calls
+                                         c-lineup-math
+                                         0))
                       (inclass . +)
                       (knr-argdecl-intro . -)
                       (knr-argdecl . 0)
@@ -143,15 +143,15 @@
 ;; this routine was edited from one donated by stack_pivot on reddit :)
 (defun vendetta-indent-c-label-intro(symbol-and-anchor)
   (let* ((new-offset nil)
-		 (anchor (cdr symbol-and-anchor))
-		 (anchor-line (line-number-at-pos anchor)))
+         (anchor (cdr symbol-and-anchor))
+         (anchor-line (line-number-at-pos anchor)))
     (save-excursion
       (goto-char anchor)
       (setq word (current-word))
       (message "word: %s" 'word)
       (if (or (eq word 'case-label)
-			  (eq word 'label))
-		  (setq new-offset '++)))
+              (eq word 'label))
+          (setq new-offset '++)))
     new-offset))
 
 (defun vendetta-set-c-mode-defaults()
@@ -330,22 +330,20 @@
 (defun vendetta-init-zero-c-style()
   (setq indent-tabs-mode nil)
   (setq c-basic-offset 4)
-  (setq tab-always-indent t)
+  (setq tab-always-indent nil)
   ;;  (c-toggle-electric-state 1)
   ;;  (c-toggle-auto-hungry-state t)
-  (c-add-style "zero" vendetta-zero-c-style)
-  (c-set-style "zero")
+  (c-add-style 'vendetta-c-style vendetta-zero-c-style)
+  (c-set-style 'vendetta-c-style)
   (vendetta-set-c-mode-defaults)
   (vendetta-init-c-font-lock-style))
 
+(defun vendetta-c-mode-initialization-hook()
+  (vendetta-init-c-font-lock-style))
+
+(defun vendetta-c-mode-common-hook()
+  (add-hook 'local-write-file-hook
+            (lambda() (untabify (point-min) (point-max)))))
+
 (defun vendetta-c-mode-hook()
-  (setq tab-always-indent nil)
-  (vendetta-init-zero-c-style)
-  (add-hook 'local-write-file-hooks
-			(lambda() (untabify (point-min) (point-max)))))
-
-;;(vendetta-init-zero-c-style)
-
-(add-to-list 'auto-mode-alist "\\.[ch]$\\" 'c-mode)
-(add-to-list 'auto-mode-alist "\\.ino$\\" 'c-mode)
-
+  (vendetta-init-zero-c-style))
