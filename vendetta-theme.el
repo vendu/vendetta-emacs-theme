@@ -1,9 +1,11 @@
 (require 'whitespace)
+(require 'verilog-mode)
 
 (deftheme vendetta "vendetta theme for programmers")
 (defconst vendetta-autoload-file "~/.emacs.d/loaddefs.el")
 (defconst vendetta-util-file "vendetta-util")
 ;; (defconst vendetta-init-file "vendetta-init")
+(defconst vendetta-prog-mode-file "vendetta-prog-mode")
 (defconst vendetta-emacs-lisp-mode-file "vendetta-emacs-lisp-mode")
 (defconst vendetta-c-mode-file "vendetta-c-mode")
 (defconst vendetta-asm-mode-file "vendetta-asm-mode")
@@ -15,7 +17,7 @@
  'vendetta
  '(inhibit-startup-screen t)
  '(tool-bar-mode nil)
- '(tab-width 4)
+;; '(tab-width 4)
  '(column-number-mode t)
  '(fill-column 72)
  '(auto-fill-mode nil)
@@ -29,39 +31,10 @@
      (newline-mark 10 [182 10]) ; 10 LINE FEED
      (tab-mark 9 [9655 9] [92 9]))) ; 9 TAB, 9655 WHITE RIGHT-POINTING TRIANGLE 「▷」
  '(whitespace-line-column 80)
- '(whitespace-style '(tab-mark))
+ '(whitespace-style '(tab-mark lines-tail))
  '(whitespace-action 'auto-cleanup)
- '(show-trailing-whitespace t)
- '(verilog-align-ifelse t)
- '(verilog-indent-tabs-mode nil)
- '(verilog-tab-always-indent t)
- '(verilog-indent-level 4)
- '(verilog-indent-level-module 4)
- '(verilog-indent-level-declaration 4)
- '(verilog-indent-level-behavioral 4)
- '(verilog-indent-level-directive 0)
- '(verilog-cexp-indent 4)
- '(verilog-case-indent 4)
- '(verilog-indent-begin-after-if 0)
- '(verilog-indent-declaration-macros nil)
- '(verilog-indent-lists t)
- '(verilog-auto-newline t)
- '(verilog-auto-indent-on-newline t)
- '(verilog-indent-begin-after-if nil)
- ;; '(verilog-auto-delete-trailing-whitespace t)
- '(verilog-auto-read-includes t)
- '(verilog-auto-template-warn-unused t)
- '(verilog-auto-undef t)
- '(verilog-auto-unused t)
- '(verilog-auto-lineup '(all))
- '(verilog-auto-endcomments t)
- '(verilog-tab-to-comment nil)
- '(verilog-date-scientific-format t)
- '(verilog-minimum-comment-distance 8)
- '(verilog-highlight-grouping-keywords t)
- '(verilog-highlight-modules t)
- '(verilog-highlight-includes t)
- '(verilog-highlight-p1800-keywords t))
+ '(show-trailing-whitespace t))
+
 ;; '(recenter-display font-lock-fontify-buffer))
 (custom-theme-set-faces
  'vendetta
@@ -147,7 +120,7 @@
   (add-to-list 'auto-mode-alist "\\.def$\\" 'asm-mode) ;; vpu/v0 assembly header
   (add-to-list 'auto-mode-alist "\\.[ch]$\\" 'c-mode) ;; c source/headers
   (add-to-list 'auto-mode-alist "\\.ino$\\" 'c-mode) ;; arduino projects?
-  (add-tolist 'auto-mode-alist '"\\.[ds]?va?h?$\\'" . verilog-mode) ;; verilog
+  (add-to-list 'auto-mode-alist '"\\.[ds]?va?h?$\\'" . verilog-mode) ;; verilog
   (add-to-list 'auto-mode-alist "testfixture.verilog" 'verilog-mode)
   (add-to-list 'auto-mode-alist "testfixture.template" 'verilog-mode)
   (add-to-list 'auto-mode-alist "\\.tex$\\" 'tex-mode)) ;; (La)Tex
@@ -161,6 +134,7 @@
   (add-hook 'before-save-hook 'collapse-blank-lines)
   (add-hook 'emacs-lisp-mode-hook 'vendetta-emacs-lisp-mode-hook)
   ;;  (add-hook 'emacs-lisp-mode-hook 'eldoc-mode)
+  (add-hook 'prog-mode-hook 'vendetta-prog-mode-hook)
   (add-hook 'c-mode-hook 'vendetta-c-mode-hook)
   (add-hook 'asm-mode-hook 'vendetta-asm-mode-hook)
   (add-hook 'sh-mode-hook 'vendetta-sh-mode-hook)
@@ -172,6 +146,7 @@
 (defun vendetta-theme-init()
   (defalias 'font-lock-ensure 'font-lock-fontify-buffer)
   (load vendetta-util-file)
+  (load vendetta-prog-mode-file)
   (load vendetta-emacs-lisp-mode-file)
   (load vendetta-c-mode-file)
   (load vendetta-asm-mode-file)

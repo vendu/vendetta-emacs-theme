@@ -39,3 +39,24 @@ just one"
   (let (value)  ; make sure list starts empty
         (dolist (element list value)
           (setq value (cons element value)))))
+
+;; thanks to jordonbiondo from github for the 80-column editor functions :)
+
+(defun edit-80-columns-mode()
+  "Set the right window margin so the edittable space is only 80 columns."
+  (interactive)
+  (let ((margins (window-margins)))
+    (if (or (car margins) (cdr margins))
+        (set-window-margins nil 0 0)
+      (set-window-margins nil 0 (max (- (window-width) 80) 0)))))
+
+(defun edit-80-columns-mode-balanced()
+  "Set both window margins so the editable space is only 80 columns."
+  (interactive)
+  (let ((margins (window-margins)))
+    (if (or (car margins) (cdr margins))
+        (set-window-margins nil 0 0)
+      (let* ((change (max (- (window-width) 80) 0))
+             (left (/ change 2))
+             (right (- change left)))
+        (set-window-margins nil left right)))))

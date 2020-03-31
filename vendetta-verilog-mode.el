@@ -1,5 +1,37 @@
 ;; verilog stuff
 
+(defun vendetta-init-velho-verilog-style()
+  (custom-set-variables
+   '(verilog-align-ifelse t)
+   '(verilog-indent-tabs-mode nil)
+   '(verilog-tab-always-indent t)
+   '(verilog-indent-level 4)
+   '(verilog-indent-level-module 4)
+   '(verilog-indent-level-declaration 4)
+   '(verilog-indent-level-behavioral 4)
+   '(verilog-indent-level-directive 0)
+   '(verilog-cexp-indent 4)
+   '(verilog-case-indent 4)
+   '(verilog-indent-begin-after-if 0)
+   '(verilog-indent-declaration-macros nil)
+   '(verilog-indent-lists t)
+   '(verilog-auto-newline t)
+   '(verilog-auto-indent-on-newline t)
+   '(verilog-indent-begin-after-if nil)
+   '(verilog-auto-delete-trailing-whitespace t)
+   '(verilog-auto-read-includes t)
+   '(verilog-auto-template-warn-unused t)
+   '(verilog-auto-undef t)
+   '(verilog-auto-unused t)
+   '(verilog-auto-lineup '(all))
+   '(verilog-auto-endcomments t)
+   '(verilog-tab-to-comment nil)
+   '(verilog-date-scientific-format t)
+   '(verilog-minimum-comment-distance 8)
+   '(verilog-highlight-grouping-keywords nil)
+   '(verilog-highlight-modules nil)
+   '(verilog-highlight-includes nil)
+   '(verilog-highlight-p1800-keywords nil)))
 
 (defun vendetta-init-velho-verilog-font-lock-style()
   (font-lock-add-keywords 'verilog-mode
@@ -59,5 +91,4 @@
   (vendetta-init-velho-verilog-style)
   (vendetta-init-velho-verilog-font-lock-style)
   (add-hook 'local-write-file-hooks
-			(lambda() (untabify (point-min) (point-max)))))
-
+            (lambda() (untabify (point-min) (point-max)))))
