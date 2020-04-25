@@ -120,7 +120,9 @@
   (add-to-list 'auto-mode-alist "\\.def$\\" 'asm-mode) ;; vpu/v0 assembly header
   (add-to-list 'auto-mode-alist "\\.[ch]$\\" 'c-mode) ;; c source/headers
   (add-to-list 'auto-mode-alist "\\.ino$\\" 'c-mode) ;; arduino projects?
-  (add-to-list 'auto-mode-alist '"\\.[ds]?va?h?$\\'" . verilog-mode) ;; verilog
+  (add-to-list 'auto-mode-alist "\\.vh$\\" 'c-mode) ;; arduino projects?
+  (add-to-list 'auto-mode-alist "\\.ino$\\" 'c-mode) ;; arduino projects?
+;;  (add-to-list 'auto-mode-alist '"\\.[ds]?va?h?$\\" . verilog-mode) ;; verilog
   (add-to-list 'auto-mode-alist "testfixture.verilog" 'verilog-mode)
   (add-to-list 'auto-mode-alist "testfixture.template" 'verilog-mode)
   (add-to-list 'auto-mode-alist "\\.tex$\\" 'tex-mode)) ;; (La)Tex
@@ -155,9 +157,10 @@
   (set-window-margins nil 0 (max (- (window-width) 80) 0))
   (vendetta-init-hooks)
   (vendetta-init-autoloads)
-  (vendetta-init-modes)
+;;  (vendetta-init-modes)
   (vendetta-init-file-extensions))
 
 (vendetta-theme-init)
 
 (provide-theme 'vendetta)
+

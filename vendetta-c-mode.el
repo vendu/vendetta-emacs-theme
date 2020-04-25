@@ -1,10 +1,10 @@
 ;; customizations for [c] programming
 
-(defconst vendetta-c-style "zero")
+;;(defconst vendetta-c-style "velho")
 
 (defalias 'font-lock-ensure 'font-lock-fontify-buffer)
 
-(defconst vendetta-zero-c-style
+(defconst vendetta-velho-c-style
   '((c-basic-offset . 4)
     (c-label-minimum-indentation . +)
     (c-tab-always-indent . nil)
@@ -135,7 +135,7 @@
                      comment-close-slash
                      scope-operator
                      one-liner-defun)))
-  "ZERO C Style")
+  "velho")
 
 ;; this routine was modified from one donated by stack_pivot on reddit :)
 (defun vendetta-indent-c-after-label(symbol-and-anchor)
@@ -160,7 +160,7 @@
   (define-key c-mode-base-map "\C-TAB" 'newline-and-indent)
   (define-key c-mode-base-map [ret] 'newline-and-indent))
 
-(defun vendetta-init-c-zero-font-lock-style()
+(defun vendetta-init-c-velho-font-lock-style()
   ;; c keywords
   (font-lock-add-keywords 'c-mode
                           '(("\\<\\(float\\)\\>" 1 font-lock-float-type-face)
@@ -325,16 +325,16 @@
                             ("\\<\\(*_r\\)\\>" 1 font-lock-thread-face))))
 
 (defun vendetta-init-c-font-lock-style()
-  (vendetta-init-c-zero-font-lock-style))
+  (vendetta-init-c-velho-font-lock-style))
 
-(defun vendetta-init-zero-c-style()
-;;  (setq indent-tabs-mode nil)
-;;  (setq c-basic-offset 4)
-;;  (setq tab-always-indent nil)
+(defun vendetta-init-velho-c-style()
+  (setq indent-tabs-mode nil)
+  (setq c-basic-offset 4)
+  (setq tab-always-indent nil)
   ;;  (c-toggle-electric-state 1)
   ;;  (c-toggle-auto-hungry-state t)
-  (c-add-style 'vendetta-c-style vendetta-zero-c-style)
-  (c-set-style 'vendetta-c-style)
+  (c-add-style "velho" vendetta-velho-c-style)
+  (c-set-style "velho")
   (vendetta-set-c-mode-defaults)
   (vendetta-init-c-font-lock-style))
 
@@ -342,8 +342,10 @@
   (vendetta-init-c-font-lock-style))
 
 (defun vendetta-c-mode-common-hook()
+;;  (defalias 'font-lock-ensure 'font-lock-fontify-buffer)
   (add-hook 'local-write-file-hook
             (lambda() (untabify (point-min) (point-max)))))
 
 (defun vendetta-c-mode-hook()
-  (vendetta-init-zero-c-style))
+  (vendetta-init-velho-c-style))
+
