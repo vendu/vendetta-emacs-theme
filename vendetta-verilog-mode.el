@@ -1,7 +1,5 @@
 ;; verilog stuff
 
-(defalias 'font-lock-ensure 'font-lock-fontify-buffer)
-
 (defun vendetta-init-velho-verilog-style()
   (custom-set-variables
    '(verilog-align-ifelse t)

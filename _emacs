@@ -31,7 +31,7 @@
 (defconst local-bytecode-path "~/.emacs.d/bytecode/")
 (defconst local-theme "vendetta")
 (defconst local-theme-path "~/.emacs.d/themes/")
-(defconst local-theme-dir "~/.emacs.d/themes/vendetta-theme/")
+(defconst local-theme-dir "~/.emacs.d/themes/vendetta/")
 (defconst local-theme-file "vendetta-theme")
 (defconst local-theme "vendetta")
 

@@ -2,13 +2,11 @@
 
 ;;(defconst vendetta-c-style "velho")
 
-(defalias 'font-lock-ensure 'font-lock-fontify-buffer)
-
 (defconst vendetta-velho-c-style
   '((c-basic-offset . 4)
     (c-label-minimum-indentation . +)
-    (c-tab-always-indent . nil)
-;;    (indent-tabs-mode . nil)
+    ;;    (c-tab-always-indent . nil)
+    ;;    (indent-tabs-mode . nil)
     (c-electric-flag t)
     (c-progress interval 1)
     (c-tab-always-indent . t)
@@ -54,7 +52,7 @@
                       ;;                      (statement .
                       ;;                                 (vendetta-indent-c-label-intro
                       ;;                                  0))
-                      (statement-case-open . 0)
+                      (statement-case-open . +)
                       (statement-case-intro . +)
                       ;;                      (statement-case-intro .
                       ;;                                            (vendetta-indent-c-label-intro
@@ -169,7 +167,7 @@
                             ("\\<\\(\"fenv_t\"\\)\\>" 1 font-lock-float-type-face)
                             ("\\<\\(\"fexcept_t\"\\)\\>" 1 font-lock-float-type-face)))
   (font-lock-add-keywords 'c-mode
-                          '(("\\>\\*:\\>" 1 font-lock-label-face)))
+                          '(("\\<\\*:\\>" 1 font-lock-label-face)))
   (font-lock-add-keywords 'c-mode
                           '(("\\<\\(void\\)\\>" 1 font-lock-type-face)
                             ("\\<\\(signed\\)\\>" 1 font-lock-type-face)
@@ -187,7 +185,7 @@
                             ("\\<\\(*_t\\)\\>" 1 font-lock-type-face)))
   ;; deprecated/hazardous constructs
   (font-lock-add-keywords 'c-mode
-                          '(("\\>\\(gets\\)\\>" 1 font-lock-warning-face)
+                          '(("\\<\\(gets\\)\\>" 1 font-lock-warning-face)
                             ("\\<\\(sprintf\\)\\>" 1 font-lock-warning-face)
                             ("\\<\\(vsprintf\\)\\>" 1 font-lock-warning-face)
                             ("\\<\\(div\\)\\>" 1 font-lock-warning-face)
@@ -206,8 +204,8 @@
                             ("\\<\\(_Generic\\)\\>" 1 font-lock-function-face)))
   ;; c types
   (font-lock-add-keywords 'c-mode
-                          '(("\\<\\(struct\\)\\>" 1 font-lock-aggregate-face)
-                            ("\\<\\(union\\)\\>" 1 font-lock-aggregate-face)
+                          '(("\\<\\(struct\\)\\>" 1 font-lock-aggregate-type-face)
+                            ("\\<\\(union\\)\\>" 1 font-lock-aggregate-type-face)
                             ("\\<\\(int\\)\\>" 1 font-lock-type-face)
                             ("\\<\\(long\\)\\>" 1 font-lock-type-face)))
   ;; c floating-point types
@@ -324,25 +322,16 @@
                             ("\\<\\(*_s\\)\\>" 1 font-lock-volatile-face)
                             ("\\<\\(*_r\\)\\>" 1 font-lock-thread-face))))
 
-(defun vendetta-init-c-font-lock-style()
-  (vendetta-init-c-velho-font-lock-style))
-
 (defun vendetta-init-velho-c-style()
-  (setq indent-tabs-mode nil)
   (setq c-basic-offset 4)
-  (setq tab-always-indent nil)
+  (defalias 'font-lock-ensure 'font-lock-fontify-buffer)
   ;;  (c-toggle-electric-state 1)
   ;;  (c-toggle-auto-hungry-state t)
+  (vendetta-init-c-velho-font-lock-style)
+  (font-lock-ensure)
   (c-add-style "velho" vendetta-velho-c-style)
   (c-set-style "velho")
   (vendetta-set-c-mode-defaults)
-  (vendetta-init-c-font-lock-style))
-
-(defun vendetta-c-mode-initialization-hook()
-  (vendetta-init-c-font-lock-style))
-
-(defun vendetta-c-mode-common-hook()
-;;  (defalias 'font-lock-ensure 'font-lock-fontify-buffer)
   (add-hook 'local-write-file-hook
             (lambda() (untabify (point-min) (point-max)))))
 

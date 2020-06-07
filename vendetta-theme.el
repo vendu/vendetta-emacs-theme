@@ -1,5 +1,4 @@
 (require 'whitespace)
-(require 'verilog-mode)
 
 (deftheme vendetta "vendetta theme for programmers")
 (defconst vendetta-autoload-file "~/.emacs.d/loaddefs.el")
@@ -13,29 +12,7 @@
 (defconst vendetta-tex-mode-file "vendetta-tex-mode")
 (defconst vendetta-verilog-mode-file "vendetta-verilog-mode")
 (defconst vendetta-custom-file "custom")
-(custom-theme-set-variables
- 'vendetta
- '(inhibit-startup-screen t)
- '(tool-bar-mode nil)
-;; '(tab-width 4)
- '(column-number-mode t)
- '(fill-column 72)
- '(auto-fill-mode nil)
- '(column-number-mode 1)
- '(comment-multi-line nil)
- '(filladapt-mode 1)
- '(whitespace-display-mappings
-   ;; all numbers are Unicode codepoint in decimal. try (insert-char 182 ) to see it
-   '(
-     (space-mark 32 [183] [46]) ; 32 SPACE, 183 MIDDLE DOT 「·」, 46 FULL STOP 「.」
-     (newline-mark 10 [182 10]) ; 10 LINE FEED
-     (tab-mark 9 [9655 9] [92 9]))) ; 9 TAB, 9655 WHITE RIGHT-POINTING TRIANGLE 「▷」
- '(whitespace-line-column 80)
- '(whitespace-style '(tab-mark lines-tail))
- '(whitespace-action 'auto-cleanup)
- '(show-trailing-whitespace t))
 
-;; '(recenter-display font-lock-fontify-buffer))
 (custom-theme-set-faces
  'vendetta
  '(font-lock-builtin-face
@@ -72,7 +49,7 @@
    ((t (:foreground "orange"))))
  '(font-lock-native-type-face
    ((t (:foreground "light orange"))))
- '(font-lock-aggregate-face
+ '(font-lock-aggregate-type-face
    ((t (:foreground "violet red"))))
  '(font-lock-variable-name-face
    ((t (:foreground "light goldenrod"))))
@@ -107,6 +84,28 @@
  '(font-lock-error-face
    ((t (:foreground "red")))))
 
+(custom-theme-set-variables
+ 'vendetta
+ '(inhibit-startup-screen t)
+ '(tool-bar-mode nil)
+;; '(tab-width 4)
+ '(column-number-mode t)
+ '(fill-column 72)
+ '(auto-fill-mode nil)
+ '(column-number-mode 1)
+ '(comment-multi-line nil)
+ '(filladapt-mode 1)
+ '(whitespace-display-mappings
+   ;; all numbers are Unicode codepoint in decimal. try (insert-char 182 ) to see it
+   '(
+     (space-mark 32 [183] [46]) ; 32 SPACE, 183 MIDDLE DOT 「·」, 46 FULL STOP 「.」
+     (newline-mark 10 [182 10]) ; 10 LINE FEED
+     (tab-mark 9 [9655 9] [92 9]))) ; 9 TAB, 9655 WHITE RIGHT-POINTING TRIANGLE 「▷」
+ '(whitespace-line-column 80)
+ '(whitespace-style '(tab-mark lines-tail))
+ '(whitespace-action 'auto-cleanup)
+ '(show-trailing-whitespace t))
+
 (defun vendetta-init-autoloads()
   (autoload 'whitespace-mode "whitespace" "Toggle whitespace visualization." t))
 ;;  (autoload 'verilog-mode "verilog-mode" "Verilog mode" t))
@@ -121,14 +120,13 @@
   (add-to-list 'auto-mode-alist "\\.[ch]$\\" 'c-mode) ;; c source/headers
   (add-to-list 'auto-mode-alist "\\.ino$\\" 'c-mode) ;; arduino projects?
   (add-to-list 'auto-mode-alist "\\.vh$\\" 'c-mode) ;; arduino projects?
-  (add-to-list 'auto-mode-alist "\\.ino$\\" 'c-mode) ;; arduino projects?
 ;;  (add-to-list 'auto-mode-alist '"\\.[ds]?va?h?$\\" . verilog-mode) ;; verilog
   (add-to-list 'auto-mode-alist "testfixture.verilog" 'verilog-mode)
   (add-to-list 'auto-mode-alist "testfixture.template" 'verilog-mode)
   (add-to-list 'auto-mode-alist "\\.tex$\\" 'tex-mode)) ;; (La)Tex
 
 (defun vendetta-init-hooks()
-  (add-hook 'focus-in-hook 'redraw-display)
+;;  (add-hook 'focus-in-hook 'redraw-display)
   (add-hook 'whitespace-mode-hook 'vendetta-whitespace-hook)
   (add-hook 'before-save-hook 'whitespace-cleanup)
   ;; (add-hook 'before-save-hook 'vendetta-clean-whitespace)
@@ -139,14 +137,13 @@
   (add-hook 'prog-mode-hook 'vendetta-prog-mode-hook)
   (add-hook 'c-mode-hook 'vendetta-c-mode-hook)
   (add-hook 'asm-mode-hook 'vendetta-asm-mode-hook)
-  (add-hook 'sh-mode-hook 'vendetta-sh-mode-hook)
+  (add-hook 'sh-mode-hook 'vendetta-prog-mode-hook)
   (add-hook 'tex-mode-hook 'vendetta-tex-mode-hook)
   (add-hook 'tex-mode-hook 'visual-line-mode)
   (add-hook 'verilog-mode-hook 'vendetta-verilog-mode-hook))
 
 ;; NOTE: we limit text display to max 80 columns (set window-margins)
 (defun vendetta-theme-init()
-  (defalias 'font-lock-ensure 'font-lock-fontify-buffer)
   (load vendetta-util-file)
   (load vendetta-prog-mode-file)
   (load vendetta-emacs-lisp-mode-file)
@@ -155,10 +152,10 @@
   (load vendetta-tex-mode-file)
   (load vendetta-verilog-mode-file)
   (set-window-margins nil 0 (max (- (window-width) 80) 0))
-  (vendetta-init-hooks)
   (vendetta-init-autoloads)
 ;;  (vendetta-init-modes)
-  (vendetta-init-file-extensions))
+  (vendetta-init-file-extensions)
+  (vendetta-init-hooks))
 
 (vendetta-theme-init)
 
