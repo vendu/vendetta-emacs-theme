@@ -145,6 +145,7 @@
 
 ;; NOTE: we limit text display to max 80 columns (set window-margins)
 (defun vendetta-theme-init()
+  (add-to-list 'load-path "~/.emacs.d/vendetta-emacs-theme")
   (load vendetta-util-file)
   (load vendetta-prog-mode-file)
   (load vendetta-emacs-lisp-mode-file)

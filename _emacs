@@ -8,42 +8,37 @@
 ;; You may delete these explanatory comments.
 (package-initialize)
 
-;;(defconst custom-file "~/.emacs-custom")
+(defconst custom-file "~/.emacs.d/custom.el")
 (defconst local-load-path "~/.emacs.d/lisp/")
 (defconst local-lisp-file "vendetta-local")
 
 (custom-set-variables
- '(package-enable-startup nil)
+ ;; custom-set-variables was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ '(global-font-lock-mode t)
+ '(help-enable-auto-load nil)
+ '(load-dangerous-libraries nil)
  '(load-prefer-newer t)
  '(mouse-wheel-progressive-speed nil)
- '(global-font-lock-mode t)
- '(transient-mark-mode t)
- '(show-paren-mode t)
- '(help-enable-auto-load nil)
- '(load-dangerous-libraries nil))
-
-(defun personal-init()
-  (add-to-list 'load-path local-load-path))
-  ;;  (load-file local-init-file-path)
-;;  (if (file-exists-p custom-file)
-;;      (load local-lisp-file)))
+ '(package-enable-startup nil)
+ '(show-paren-mode t))
 
 (defconst local-bytecode-path "~/.emacs.d/bytecode/")
-(defconst local-theme "vendetta")
-(defconst local-theme-path "~/.emacs.d/themes/")
-(defconst local-theme-dir "~/.emacs.d/themes/vendetta/")
-(defconst local-theme-file "vendetta-theme")
-(defconst local-theme "vendetta")
+(defconst custom-theme-directory "~/.emacs.d/")
+;;(defconst local-theme-file "vendetta-theme")
+;;(defconst local-theme "vendetta")
 
 (defun local-init()
-  (add-to-list 'load-path local-theme-path)
-  (add-to-list 'load-path local-theme-dir)
-;;  (if (file-exists-p custom-file)
-;;      (load custom-file))
-  (load local-theme-file))
+  (if (file-exists-p custom-file)
+      (load custom-file))
+  (load-theme 'vendetta))
+;;  (load local-theme-file)
+;;  (require 'vendetta))
+;;  (load local-theme-file))
 
 (local-init)
 
-(personal-init)
-
 (put 'upcase-region 'disabled nil)
+
