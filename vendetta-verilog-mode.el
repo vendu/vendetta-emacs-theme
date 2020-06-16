@@ -32,11 +32,11 @@
    '(verilog-highlight-modules nil)
    '(verilog-highlight-includes nil)
    '(verilog-highlight-p1800-keywords nil)))
-   '(verilog-tool "verilator -Wall --lint-only")
-   '(verilog-linter "verilator -Wall --lint-only")
-   '(verilog-coverage "verilator --coverage")
-   '(verilog-simulator "verilator")
-   '(verilog-compiler "verilator --sc"))
+'(verilog-tool "verilator -Wall --lint-only")
+'(verilog-linter "verilator -Wall --lint-only")
+'(verilog-coverage "verilator --coverage")
+'(verilog-simulator "verilator")
+'(verilog-compiler "verilator --sc"))
 
 (defun vendetta-init-velho-verilog-font-lock-style()
   (font-lock-add-keywords 'verilog-mode
@@ -93,6 +93,8 @@
                             ("\\b\\w'`'\\b" . font-lock-preprocessor-face))))
 
 (defun vendetta-verilog-mode-hook()
+  (setq tab-width 4)
+  (setq indent-tabs-mode nil)
   (vendetta-init-velho-verilog-style))
 ;;  (vendetta-init-velho-verilog-font-lock-style)
 ;;  (defalias 'font-lock-ensure 'font-lock-fontify-buffer)
