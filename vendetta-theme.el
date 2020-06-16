@@ -88,7 +88,8 @@
  'vendetta
  '(inhibit-startup-screen t)
  '(tool-bar-mode nil)
-;; '(tab-width 4)
+ ;; '(tab-width 4)
+ '(tab-always-indent t)
  '(column-number-mode t)
  '(fill-column 72)
  '(auto-fill-mode nil)

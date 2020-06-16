@@ -332,9 +332,10 @@
   (c-add-style "velho" vendetta-velho-c-style)
   (c-set-style "velho")
   (vendetta-set-c-mode-defaults)
-  (add-hook 'local-write-file-hook
-            (lambda() (untabify (point-min) (point-max)))))
+;;  (add-hook 'local-write-file-hook
+;;            (lambda() (untabify (point-min) (point-max)))))
 
 (defun vendetta-c-mode-hook()
-  (vendetta-init-velho-c-style))
+  (vendetta-init-velho-c-style)
+  (font-lock-fontify-buffer))
 
