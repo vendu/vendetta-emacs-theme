@@ -77,7 +77,7 @@
                       (brace-list-open . 0)
                       (brace-list-intro . +)
                       (brace-list-entry . 0)
-                      (brace-list-close . -)
+                      (brace-list-close . 0)
                       ;;                      (brace-list-close .
                       ;;                                        (c-lineup-arglist-close-under-paren -))
                       (arglist-intro .
@@ -160,12 +160,12 @@
 
 (defun vendetta-init-c-velho-font-lock-style()
   ;; c keywords
-  (font-lock-add-keywords 'c-mode
-                          '(("\\<\\(float\\)\\>" 1 font-lock-float-type-face)
-                            ("\\<\\(double\\)\\>" 1 font-lock-float-type-face)
-                            ("\\<\\(\"long double\"\\)\\>" 1 font-lock-float-type-face)
-                            ("\\<\\(\"fenv_t\"\\)\\>" 1 font-lock-float-type-face)
-                            ("\\<\\(\"fexcept_t\"\\)\\>" 1 font-lock-float-type-face)))
+  ;; (font-lock-add-keywords 'c-mode
+  ;;                         '(("\\<\\(float\\)\\>" 0 font-lock-float-type-face t)
+  ;;                           ("\\<\\(double\\)\\>" 0 font-lock-float-type-face t)
+  ;;                           ("\\<\\(\"long double\"\\)\\>" o font-lock-float-type-face t)
+  ;;                           ("\\<\\(\"fenv_t\"\\)\\>" 0 font-lock-float-type-face t)
+  ;;                           ("\\<\\(\"fexcept_t\"\\)\\>" 0 font-lock-float-type-face t)))
   (font-lock-add-keywords 'c-mode
                           '(("\\<\\*:\\>" 1 font-lock-label-face)))
   (font-lock-add-keywords 'c-mode
@@ -203,10 +203,11 @@
                             ("\\<\\(_Noreturn\\)\\>" 1 font-lock-memory-face)
                             ("\\<\\(_Generic\\)\\>" 1 font-lock-function-face)))
   ;; c types
+  ;; (font-lock-add-keywords 'c-mode
+  ;;                         '(("\\<struct\\>" 1 font-lock-aggregate-type-face)
+  ;;                           ("\\<union\\>" 1 font-lock-aggregate-type-face)))
   (font-lock-add-keywords 'c-mode
-                          '(("\\<\\(struct\\)\\>" 1 font-lock-aggregate-type-face)
-                            ("\\<\\(union\\)\\>" 1 font-lock-aggregate-type-face)
-                            ("\\<\\(int\\)\\>" 1 font-lock-type-face)
+                          '(("\\<\\(int\\)\\>" 1 font-lock-type-face)
                             ("\\<\\(long\\)\\>" 1 font-lock-type-face)))
   ;; c floating-point types
   (font-lock-add-keywords 'c-mode
@@ -222,7 +223,7 @@
                             ("\\<\\(C_CONST\\)\\>" 1 font-lock-attribute-face)
                             ("\\<\\(C_NORETURN\\)\\>" 1 font-lock-attribute-face)
                             ("\\<\\(C_THREADLOCAL\\)\\>" 1 font-lock-thread-face)
-                            ("\\<\\(C_AVLA\\)\\>" 1 font-lock-memory-face)
+                            ("\\<\\(C_VLA\\)\\>" 1 font-lock-memory-face)
                             ("\\<\\(C_ALIGNED\\)\\>" 1 font-lock-memory-face)
                             ("\\<\\(C_PACKED\\)\\>" 1 font-lock-memory-face)
                             ("\\<\\(C_REGPARM\\)\\>" 1 font-lock-register-face)
@@ -276,21 +277,19 @@
                           '(("\\<\\(pthread*_t\\)\\>" 1 font-lock-type-face)
                             ("\\<\\(pthread_*\\)\\>" 1 font-lock-type-face)))
   (font-lock-add-keywords 'c-mode
-                          '(("\\<\\(FIXME\\)\\>" 1 font-lock-warning-face)
-                            ("\\<\\(TODO\\)\\>" 1 font-lock-warning-face)
-                            ("\\<\\(FIXME\\)\\>" 1 font-lock-warning-face)
-                            ("\\<\\(QUESTION\\)\\>" 1 font-lock-warning-face)
-                            ("\\<\\(REQUEST\\)\\>" 1 font-lock-warning-face)
-                            ("\\<\\(WONTFIX\\)\\>" 1 font-lock-warning-face)
-                            ("\\<\\(FALLTHRU\\)\\>" 1 font-lock-warning-face)
-                            ("\\<\\(NOTREACHED\\)\\>" 1 font-lock-warning-face)
-                            ("\\<\\(AUTHOR\\)\\>" 1 font-lock-doc-face)
-                            ("\\<\\(LICENSE\\)\\>" 1 font-lock-doc-face)
-                            ("\\<\\(COPYRIGHT\\)\\>" 1 font-lock-doc-face)
-                            ("\\<\\(NOTE\\)\\>" 1 font-lock-doc-face)
-                            ("\\<\\(NOTES\\)\\>" 1 font-lock-doc-face)
-                            ("\\<\\(NOTES\\)\\>" 1 font-lock-doc-face)
-                            ("\\<\\(REFERENCE\\)\\>" 1 font-lock-doc-face)))
+                          '(("\\<\\(FIXME\\)\\>" 0 font-lock-warning-face t)
+                            ("\\<\\(TODO\\)\\>" 0 font-lock-warning-face t)
+                            ("\\<\\(QUESTION\\)\\>" 0 font-lock-warning-face t)
+                            ("\\<\\(REQUEST\\)\\>" 0 font-lock-warning-face t)
+                            ("\\<\\(WONTFIX\\)\\>" 0 font-lock-warning-face t)
+                            ("\\<\\(FALLTHRU\\)\\>" 0 font-lock-warning-face t)
+                            ("\\<\\(NOTREACHED\\)\\>" 0 font-lock-warning-face t)
+                            ("\\<\\(AUTHOR\\)\\>" 0 font-lock-doc-face t)
+                            ("\\<\\(LICENSE\\)\\>" 0 font-lock-doc-face t)
+                            ("\\<\\(COPYRIGHT\\)\\>" 0 font-lock-doc-face t)
+                            ("\\<\\(NOTE\\)\\>" 0 font-lock-doc-face t)
+                            ("\\<\\(NOTES\\)\\>" 0 font-lock-doc-face t)
+                            ("\\<\\(REFERENCE\\)\\>" 0 font-lock-doc-face t)))
   ;; library functions
   (font-lock-add-keywords 'c-mode
                           '(("\\<\\(signal\\)\\>" 1 font-lock-signal-face)
@@ -324,19 +323,16 @@
 
 (defun vendetta-init-velho-c-style()
   (setq c-basic-offset 4)
-  (defalias 'font-lock-ensure 'font-lock-fontify-buffer)
   ;;  (c-toggle-electric-state 1)
   ;;  (c-toggle-auto-hungry-state t)
   (vendetta-init-c-velho-font-lock-style)
-  (font-lock-ensure)
   (c-add-style "velho" vendetta-velho-c-style)
   (c-set-style "velho")
-  (vendetta-set-c-mode-defaults))
-;;  (add-hook 'local-write-file-hook
-;;            (lambda() (untabify (point-min) (point-max)))))
+  (vendetta-set-c-mode-defaults)
+  (add-hook 'local-write-file-hook
+            (lambda() (untabify (point-min) (point-max)))))
 
 (defun vendetta-c-mode-hook()
   (setq tab-width 4)
-  (vendetta-init-velho-c-style)
-  (font-lock-fontify-buffer))
+  (vendetta-init-velho-c-style))
 

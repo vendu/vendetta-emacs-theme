@@ -82,7 +82,13 @@
  '(font-lock-signal-face
    ((t (:foreground "light coral"))))
  '(font-lock-error-face
-   ((t (:foreground "red")))))
+   ((t (:foreground "red"))))
+ '(font-lock-include-face
+   ((t (:foreground "pink")))))
+ ;; '(font-lock-input-face
+ ;;   ((t (:foreground "khaki"))))
+ ;; '(font-lock-output-face
+ ;;   ((t (:foreground "dark khaki")))))
 
 (custom-theme-set-variables
  'vendetta
@@ -121,13 +127,17 @@
   (add-to-list 'auto-mode-alist "\\.[ch]$\\" 'c-mode) ;; c source/headers
   (add-to-list 'auto-mode-alist "\\.ino$\\" 'c-mode) ;; arduino projects?
   (add-to-list 'auto-mode-alist "\\.vh$\\" 'c-mode) ;; arduino projects?
-;;  (add-to-list 'auto-mode-alist '"\\.[ds]?va?h?$\\" . verilog-mode) ;; verilog
+  ;;  (add-to-list 'auto-mode-alist '"\\.[ds]?va?h?$\\" . verilog-mode) ;; verilog
   (add-to-list 'auto-mode-alist "testfixture.verilog" 'verilog-mode)
   (add-to-list 'auto-mode-alist "testfixture.template" 'verilog-mode)
   (add-to-list 'auto-mode-alist "\\.tex$\\" 'tex-mode)) ;; (La)Tex
 
+(defun vendetta-before-save-hook()
+  (whitespace-cleanup)
+  (untabify (point-min) (point-max)))
+
 (defun vendetta-init-hooks()
-;;  (add-hook 'focus-in-hook 'redraw-display)
+  ;;  (add-hook 'focus-in-hook 'redraw-display)
   (add-hook 'whitespace-mode-hook 'vendetta-whitespace-hook)
   (add-hook 'before-save-hook 'whitespace-cleanup)
   ;; (add-hook 'before-save-hook 'vendetta-clean-whitespace)
@@ -155,7 +165,7 @@
   (load vendetta-verilog-mode-file)
   (set-window-margins nil 0 (max (- (window-width) 80) 0))
   (vendetta-init-autoloads)
-;;  (vendetta-init-modes)
+  ;;  (vendetta-init-modes)
   (vendetta-init-file-extensions)
   (vendetta-init-hooks))
 
