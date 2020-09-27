@@ -60,3 +60,4 @@ just one"
              (left (/ change 2))
              (right (- change left)))
         (set-window-margins nil left right)))))
+

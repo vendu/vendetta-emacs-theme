@@ -133,16 +133,18 @@
   (add-to-list 'auto-mode-alist "\\.tex$\\" 'tex-mode)) ;; (La)Tex
 
 (defun vendetta-before-save-hook()
+  (untabify (point-min) (point-max))
   (whitespace-cleanup)
-  (untabify (point-min) (point-max)))
+  (vendetta-clean-whitespace)
+  (vendetta-collapse-blank-lines))
 
 (defun vendetta-init-hooks()
   ;;  (add-hook 'focus-in-hook 'redraw-display)
-  (add-hook 'whitespace-mode-hook 'vendetta-whitespace-hook)
-  (add-hook 'before-save-hook 'whitespace-cleanup)
+;;  (add-hook 'whitespace-mode-hook 'vendetta-whitespace-hook)
+  (add-hook 'before-save-hook 'vendetta-before-save-hook)
   ;; (add-hook 'before-save-hook 'vendetta-clean-whitespace)
   ;;  (add-hook 'before-save-hook 'xah-clean-whitespace)
-  (add-hook 'before-save-hook 'collapse-blank-lines)
+;;  (add-hook 'before-save-hook 'collapse-blank-lines)
   (add-hook 'emacs-lisp-mode-hook 'vendetta-emacs-lisp-mode-hook)
   ;;  (add-hook 'emacs-lisp-mode-hook 'eldoc-mode)
   (add-hook 'prog-mode-hook 'vendetta-prog-mode-hook)

@@ -31,12 +31,12 @@
    '(verilog-highlight-grouping-keywords nil)
    '(verilog-highlight-modules nil)
    '(verilog-highlight-includes nil)
-   '(verilog-highlight-p1800-keywords nil))
-  '(verilog-tool "verilator -Wall --lint-only")
-  '(verilog-linter "verilator -Wall --lint-only")
-  '(verilog-coverage "verilator --coverage")
-  '(verilog-simulator "verilator")
-  '(verilog-compiler "verilator --sc"))
+   '(verilog-highlight-p1800-keywords nil)
+   '(verilog-tool "verilator -Wall --lint-only")
+   '(verilog-linter "verilator -Wall --lint-only")
+   '(verilog-coverage "verilator --coverage")
+   '(verilog-simulator "verilator")
+   '(verilog-compiler "verilator --sc")))
 
 ;; (defun vendetta-init-velho-verilog-font-lock-style()
 ;;   ;; (font-lock-remove-keywords 'verilog-mode
