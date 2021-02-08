@@ -2,6 +2,7 @@
 
 (deftheme vendetta "vendetta theme for programmers")
 (defconst vendetta-autoload-file "~/.emacs.d/loaddefs.el")
+(defconst vendetta-custom-file "vendetta-custom")
 (defconst vendetta-util-file "vendetta-util")
 ;; (defconst vendetta-init-file "vendetta-init")
 (defconst vendetta-prog-mode-file "vendetta-prog-mode")
@@ -92,10 +93,12 @@
 
 (custom-theme-set-variables
  'vendetta
+ '(c-basic-offset 4)
  '(inhibit-startup-screen t)
  '(tool-bar-mode nil)
+ '(tab-width 4)
  '(indent-tabs-mode nil)
- '(tab-always-indent t)
+ '(tab-always-indent nil)
  '(column-number-mode t)
  '(fill-column 72)
  '(auto-fill-mode nil)
@@ -132,23 +135,29 @@
   (add-to-list 'auto-mode-alist "testfixture.template" 'verilog-mode)
   (add-to-list 'auto-mode-alist "\\.tex$\\" 'tex-mode)) ;; (La)Tex
 
+(defun vendetta-after-save-hook()
+  (font-lock-fontify-buffer))
+
 (defun vendetta-before-save-hook()
-  (untabify (point-min) (point-max))
   (whitespace-cleanup)
   (vendetta-clean-whitespace)
-  (vendetta-collapse-blank-lines))
+  (delete-trailing-whitespace)
+  (vendetta-collapse-blank-lines)
+  (untabify (point-min) (point-max)))
 
 (defun vendetta-init-hooks()
   ;;  (add-hook 'focus-in-hook 'redraw-display)
 ;;  (add-hook 'whitespace-mode-hook 'vendetta-whitespace-hook)
   (add-hook 'before-save-hook 'vendetta-before-save-hook)
+  (add-hook 'after-save-hook 'vendetta-after-save-hook)
   ;; (add-hook 'before-save-hook 'vendetta-clean-whitespace)
   ;;  (add-hook 'before-save-hook 'xah-clean-whitespace)
 ;;  (add-hook 'before-save-hook 'collapse-blank-lines)
   (add-hook 'emacs-lisp-mode-hook 'vendetta-emacs-lisp-mode-hook)
   ;;  (add-hook 'emacs-lisp-mode-hook 'eldoc-mode)
   (add-hook 'prog-mode-hook 'vendetta-prog-mode-hook)
-  (add-hook 'c-mode-hook 'vendetta-c-mode-hook)
+;;  (add-hook 'c-initialization-hook 'vendetta-c-initialization-hook)
+  (add-hook 'c-mode-common-hook 'vendetta-c-mode-hook)
   (add-hook 'asm-mode-hook 'vendetta-asm-mode-hook)
   (add-hook 'sh-mode-hook 'vendetta-prog-mode-hook)
   (add-hook 'tex-mode-hook 'vendetta-tex-mode-hook)
@@ -158,6 +167,7 @@
 ;; NOTE: we limit text display to max 80 columns (set window-margins)
 (defun vendetta-theme-init()
   (add-to-list 'load-path "~/.emacs.d/vendetta-emacs-theme")
+  (load vendetta-custom-file)
   (load vendetta-util-file)
   (load vendetta-prog-mode-file)
   (load vendetta-emacs-lisp-mode-file)

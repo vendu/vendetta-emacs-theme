@@ -2,7 +2,7 @@
 
 ;;(defconst vendetta-c-style "velho")
 
-(defconst vendetta-velho-c-style
+(defconst vendetta-c-style
   '((c-basic-offset . 4)
     (c-label-minimum-indentation . +)
     ;;    (c-tab-always-indent . nil)
@@ -133,7 +133,7 @@
                      comment-close-slash
                      scope-operator
                      one-liner-defun)))
-  "velho")
+  "Vendetta C Style")
 
 ;; this routine was modified from one donated by stack_pivot on reddit :)
 (defun vendetta-indent-c-after-label(symbol-and-anchor)
@@ -158,7 +158,7 @@
   (define-key c-mode-base-map "\C-TAB" 'newline-and-indent)
   (define-key c-mode-base-map [ret] 'newline-and-indent))
 
-(defun vendetta-init-c-velho-font-lock-style()
+(defun vendetta-init-faces()
   ;; c keywords
   ;; (font-lock-add-keywords 'c-mode
   ;;                         '(("\\<\\(float\\)\\>" 0 font-lock-float-type-face t)
@@ -321,18 +321,20 @@
                             ("\\<\\(*_s\\)\\>" 1 font-lock-volatile-face)
                             ("\\<\\(*_r\\)\\>" 1 font-lock-thread-face))))
 
-(defun vendetta-init-velho-c-style()
-  (setq c-basic-offset 4)
+(defun vendetta-init-c-style()
   ;;  (c-toggle-electric-state 1)
   ;;  (c-toggle-auto-hungry-state t)
-  (vendetta-init-c-velho-font-lock-style)
-  (c-add-style "velho" vendetta-velho-c-style)
-  (c-set-style "velho")
-  (vendetta-set-c-mode-defaults)
-  (add-hook 'local-write-file-hook
-            (lambda() (untabify (point-min) (point-max)))))
+  (vendetta-init-faces)
+  (c-set-style "vendetta")
+  (vendetta-set-c-mode-defaults))
+;;  (add-hook 'local-write-file-hook
+  ;;          (lambda() (untabify (point-min) (point-max)))))
+
+;;(defun vendetta-c-initialization-hook
+;;  (setq c-basic-offset 4))
 
 (defun vendetta-c-mode-hook()
-  (setq tab-width 4)
-  (vendetta-init-velho-c-style))
-
+  (set-foreground-color "white")
+  (set-background-color "black")
+  (c-add-style "vendetta" vendetta-c-style)
+  (vendetta-init-c-style))

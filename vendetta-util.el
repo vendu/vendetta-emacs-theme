@@ -10,15 +10,15 @@ just one"
         ;;        (narrow-to-region $begin $end)
         (widen)
         (progn
-          (goto-char (point-min))
+          (goto-char (begin))
           (while (re-search-forward "[ \t]+\n" nil "move")
             (replace-match "\n")))
         (progn
-          (goto-char (point-min))
+          (goto-char (begin))
           (while (re-search-forward "\n\n\n+" nil "move")
             (replace-match "\n\n")))
         (progn
-          (goto-char (point-max))
+          (goto-char (end))
           (while (equal (char-before) 32) ; char 32 is space
             (delete-char -1))))))
   nil)
@@ -60,4 +60,3 @@ just one"
              (left (/ change 2))
              (right (- change left)))
         (set-window-margins nil left right)))))
-

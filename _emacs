@@ -9,8 +9,8 @@
 (package-initialize)
 
 (defconst custom-file "~/.emacs.d/custom.el")
+(defconst local-lisp-file "~/.emacs.d/vendetta-local.el")
 (defconst local-load-path "~/.emacs.d/lisp/")
-(defconst local-lisp-file "vendetta-local")
 
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
@@ -27,16 +27,16 @@
 
 (defconst local-bytecode-path "~/.emacs.d/bytecode/")
 (defconst custom-theme-directory "~/.emacs.d/")
-;;(defconst local-theme-file "vendetta-theme")
-;;(defconst local-theme "vendetta")
+(defconst local-theme-file "vendetta-theme")
+(defconst local-theme "vendetta")
 
 (defun local-init()
   (if (file-exists-p custom-file)
       (load custom-file))
-  (load-theme 'vendetta))
+  (if (file-exists-p local-lisp-file)
+      (load local-lisp-file))
 ;;  (load local-theme-file)
-;;  (require 'vendetta))
-;;  (load local-theme-file))
+  (load-theme 'vendetta))
 
 (local-init)
 
