@@ -203,9 +203,9 @@
                             ("\\<\\(_Noreturn\\)\\>" 1 font-lock-memory-face)
                             ("\\<\\(_Generic\\)\\>" 1 font-lock-function-face)))
   ;; c types
-  ;; (font-lock-add-keywords 'c-mode
-  ;;                         '(("\\<struct\\>" 1 font-lock-aggregate-type-face)
-  ;;                           ("\\<union\\>" 1 font-lock-aggregate-type-face)))
+  ;;(font-lock-add-keywords 'c-mode
+  ;;'(("\\<struct\\>" 1 font-lock-aggregate-type-face)
+  ;;("\\<union\\>" 1 font-lock-aggregate-type-face)))
   (font-lock-add-keywords 'c-mode
                           '(("\\<\\(int\\)\\>" 1 font-lock-type-face)
                             ("\\<\\(long\\)\\>" 1 font-lock-type-face)))

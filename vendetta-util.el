@@ -21,6 +21,7 @@ just one"
           (goto-char (end))
           (while (equal (char-before) 32) ; char 32 is space
             (delete-char -1))))))
+  (font-lock-fontify-buffer)
   nil)
 
 (defun collapse-blank-lines ()
