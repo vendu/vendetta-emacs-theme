@@ -1,7 +1,5 @@
 ;; customizations for [c] programming
 
-;;(defconst vendetta-c-style "velho")
-
 (defconst vendetta-c-style
   '((c-basic-offset . 4)
     (c-label-minimum-indentation . +)
@@ -134,6 +132,7 @@
                      scope-operator
                      one-liner-defun)))
   "Vendetta C Style")
+(c-add-style "vendetta" vendetta-c-style)
 
 ;; this routine was modified from one donated by stack_pivot on reddit :)
 (defun vendetta-indent-c-after-label(symbol-and-anchor)
